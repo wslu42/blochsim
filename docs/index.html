@@ -17,15 +17,18 @@
   <script src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
 
   <script>
-    alert('PING 4.675');               // 一定會跳窗
+    alert('PING 4.7');               // 一定會跳窗
   </script>
 
-  <style>#glowscript { border: 10px dashed #999; }</style>
+  <style>#glowscript { border: 10px dashed #999; min-height: 200px; }</style>
 
 </head>
 <body>
   <div id="glowscript" class="glowscript"></div>
 
+  <script>
+    window.__context = { glowscript_container: $("#glowscript") };
+  </script>
   <script type="text/x-glowscript">GlowScript 3.2 VPython
 print("GlowScript is running on GitHub Pages!")
 </script>
