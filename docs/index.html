@@ -21,6 +21,11 @@
   <script>
     window.__context = { glowscript_container: $("#glowscript").removeAttr("id") };
   </script>
+  
+  <script>
+    alert('PING 42');               // 一定會跳窗
+    console.log('HELLO 42');        // 一定會出現在 Console
+  </script>
 
   <script>
   console.log('jQuery:', typeof $);
