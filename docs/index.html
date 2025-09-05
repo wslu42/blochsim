@@ -5,18 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Web VPython on GitHub Pages</title>
 
-  <!-- 必要：GlowScript / VPython 3.2 运行庫 -->
+  <!-- GlowScript / VPython 3.2 必要檔 -->
   <link rel="stylesheet" href="https://www.glowscript.org/css/ide.css">
   <script src="https://www.glowscript.org/lib/jquery/2.1/jquery.min.js"></script>
+  <!-- 用公共 CDN 的 jQuery UI，避免 CORB -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
   <script src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
 </head>
 <body>
-  <!-- 容器：id 建議就叫 glowscript，class 必須含 glowscript -->
   <div id="glowscript" class="glowscript"></div>
 
-  <!-- 這裡直接寫 VPython（GlowScript）程式 -->
+  <!-- ★ 不用 jQuery，純 DOM 指定容器（GlowScript 需要這一步） -->
+  <script>
+    (function () {
+      var el = document.getElementById('glowscript');
+      el.removeAttribute('id');                // GlowScript 會把 id 當內部使用，需移除
+      window.__context = { glowscript_container: el };
+    })();
+  </script>
+
   <script type="text/x-glowscript">
 GlowScript 3.2 VPython
 # Created By : Hong-Yi, Yang
