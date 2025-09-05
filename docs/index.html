@@ -2,55 +2,464 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>GlowScript (JS API) Animation</title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css">
-  <link rel="stylesheet" href="https://www.glowscript.org/css/ide.css">
-
-  <!-- jQuery + jQuery UI（與 GlowScript 3.2 相容） -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
-  <!-- 只需要 glow（JS API 寫法不需 RSrun） -->
-  <script src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
-
-  <script>alert('PING 6.0');</script>
-
+  <title>BlochSim — GlowScript Export</title>
   <style>
-    #gsbox { border: 8px dashed #999; padding: 8px; }
+    /* 方便觀察容器是否有被掛上內容 */
+    #glowscript { border: 8px dashed #999; padding: 8px; }
   </style>
 </head>
 <body>
-  <div id="gsbox" class="glowscript"></div>
 
+<div id="glowscript" class="glowscript">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <!-- GlowScript CSS -->
+  <link rel="stylesheet" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css">
+  <link rel="stylesheet" href="https://www.glowscript.org/css/ide.css">
+
+  <!-- MathJax（你的原始 export 就有用到） -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <!-- ✅ 改用穩定 CDN：jQuery 2.1.4 + jQuery UI 1.12.1 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+  <!-- GlowScript runtime（保持 3.2） -->
+  <script src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
+  <script src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
+
+
+  <!-- ========= 下面整段就是你的 export JS；中間內容保持不動 ========= -->
   <script>
-    $(function () {
-      // 把畫布綁到容器
-      window.__context = { glowscript_container: $("#gsbox") };
+// START JAVASCRIPT
+;(function() {;
+var ρσ_modules = {};
+ρσ_modules.pythonize = {};
 
-      // 畫布與物件
-      var scene = canvas({ title: "JS API Animation", width: 640, height: 360, background: color.white });
-      var ring0 = ring({ pos: vec(0,0,0), axis: vec(0,0,1), radius: 2.0, thickness: 0.02, color: vec(0.8,0.8,0.8) });
-      var ball  = sphere({ pos: vec(2,0,0), radius: 0.3, color: color.cyan, opacity: 0.9 });
-
-      print("✅ JS API animation started");
-      scene.append_to_caption("\\n[tip] click canvas to pause/resume\\n");
-
-      // 簡單動畫：讓球沿半徑=2 的圓運動
-      var t = 0, running = true;
-      function loop() {
-        if (running) {
-          t += 0.02;  // 調整速度
-          ball.pos = vec( 2*Math.cos(t), 2*Math.sin(t), 0 );
+(function(){
+    function strings() {
+        var string_funcs, exclude, name;
+        string_funcs = set("capitalize strip lstrip rstrip islower isupper isspace lower upper swapcase center count endswith startswith find rfind index rindex format join ljust rjust partition rpartition replace split rsplit splitlines zfill".split(" "));
+        if (!arguments.length) {
+            exclude = (function(){
+                var s = ρσ_set();
+                s.jsset.add("split");
+                s.jsset.add("replace");
+                return s;
+            })();
+        } else if (arguments[0]) {
+            exclude = Array.prototype.slice.call(arguments);
+        } else {
+            exclude = null;
         }
-        requestAnimationFrame(loop);
-      }
-      loop();
-
-      // 點擊畫布可暫停/繼續
-      scene.bind("click", function () { running = !running; });
+        if (exclude) {
+            string_funcs = string_funcs.difference(set(exclude));
+        }
+        var ρσ_Iter0 = string_funcs;
+        ρσ_Iter0 = ((typeof ρσ_Iter0[Symbol.iterator] === "function") ? (ρσ_Iter0 instanceof Map ? ρσ_Iter0.keys() : ρσ_Iter0) : Object.keys(ρσ_Iter0));
+        for (var ρσ_Index0 of ρσ_Iter0) {
+            name = ρσ_Index0;
+            (ρσ_expr_temp = String.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name] = (ρσ_expr_temp = ρσ_str.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name];
+        }
+    };
+    if (!strings.__module__) Object.defineProperties(strings, {
+        __module__ : {value: "pythonize"}
     });
+
+    ρσ_modules.pythonize.strings = strings;
+})();
+async function __main__() {
+"use strict";
+    var display = canvas;
+    var scene = canvas();
+
+    function round(num, n=0) {return Number(num.toFixed(n))}
+
+    function input(arg) {
+    	arg = arg || {}
+    	if (arg.prompt !== undefined && arg.prompt != '') return prompt(arg.prompt)
+    	else if (typeof arg === 'string') return prompt(arg)
+    	else return prompt()
+    }
+
+    var version, print, arange, __name__, type, ρσ_ls, scene, scale, rot_rate, xaxis, yaxis, zaxis, ball, pointer, ang, init, bH, bX, bY, bZ, bS, bT, wP, bP;
+    version = ρσ_list_decorate([ "3.2", "glowscript" ]);
+    Array.prototype['+'] = function(r) {return this.concat(r)}
+    Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
+    window.__GSlang = "vpython";
+    print = GSprint;
+    arange = range;
+    __name__ = "__main__";
+    type = pytype;
+    var strings = ρσ_modules.pythonize.strings;
+
+    strings();
+    "6";
+    scene = ρσ_interpolate_kwargs.call(this, canvas, [ρσ_desugar_kwargs({title: "original code owner: <b>Hong-Yi Yang<\/b>. Master Student at NCHU, Taiwan\n", width: 400, height: 400, x: 0, y: 0, center: vec(0, 0, 0), background: vec(1, 1, 1), align: "left"})]);
+    "7";
+    scene.append_to_title("adopted and modified by Wen-Sen Lu, IBM Quantum\n\n");
+    "9";
+    scene.append_to_title("Manual -- Drag with right click: rotate; Scroll: zoom; Left click + Shift: pan\n");
+    "10";
+    scene.append_to_title("使用說明 -- 滑鼠右鍵: 旋轉視角; 滾輪: 縮放畫面; 左鍵+Shift: 平移\n\n");
+    "11";
+    scene.append_to_title("\\(| \\Psi \\rangle =\\alpha \\left| 0\\rangle +\\beta \\right| 1\\rangle\\)"["+"]("\\(\\quad\\quad\\quad\\)"));
+    "12";
+    scene.append_to_title("\\(\\alpha =\\cos \\dfrac{\\theta }{2}\\)"["+"]("  ;  ")["+"]("\\(\\beta =e^{i\\phi }\\sin \\dfrac{\\theta }{2}\\)")["+"]("\n\n"));
+    "14";
+    ρσ_interpolate_kwargs.call(scene.camera, scene.camera.rotate, [ρσ_desugar_kwargs({angle: pi["/"](2), axis: vec(1, 0, 0)})]);
+    "15";
+    ρσ_interpolate_kwargs.call(scene.camera, scene.camera.rotate, [ρσ_desugar_kwargs({angle: pi["*"](3)["/"](4), axis: vec(0, 0, 1)})]);
+    "16";
+    ρσ_interpolate_kwargs.call(scene.camera, scene.camera.rotate, [ρσ_desugar_kwargs({angle: pi["/"](15), axis: vec(1, 1["-u"]()["*"](1), 0)})]);
+    "17";
+    scene.center = vector(0, 0, .25);
+    "19";
+    scene.caption = "\n";
+    "20";
+    scene.append_to_caption("\\(\\theta = 0\\)"["+"]("\\(^{\\circ }\\)")["+"]("  ;  \\(\\phi = 0\\)")["+"]("\\(^{\\circ }\\)")["+"]("\n\n"));
+    "21";
+    scene.append_to_caption("\\(\\alpha = 1\\)  ;  \\(\\beta = 0 + 0i\\) \n\n");
+    "22";
+    scene.append_to_caption("Probability of \\(| 0\\rangle\\): 100%\n"["+"]("Probability of \\(| 1\\rangle\\): 0%\n"));
+    "23";
+    scene.append_to_caption("\n* the \\(\\phi\\) value at \\(| 1\\rangle\\) \n here is just an FYI \n and not always correct!");
+    "24";
+    scene.append_to_caption("\n* 於 \\(| 1\\rangle\\) 時之 \\(\\phi\\) 值僅供參考！\n\n");
+    "26";
+    MathJax.Hub.Queue(ρσ_list_decorate([ "Typeset", MathJax.Hub ]));
+    "28";
+    scale = 1.25;
+    "29";
+    rot_rate = 120;
+    "30";
+    xaxis = ρσ_interpolate_kwargs.call(this, arrow, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](scale), 0, 0), axis: vec(2["*"](scale), 0, 0), color: vec(.2, .2, .2), opacity: .2, shaftwidth: .8["*"](scale)["/"](40), headwidth: 2.4["*"](scale)["/"](40), headlength: 3.2["*"](scale)["/"](40)})]);
+    "31";
+    yaxis = ρσ_interpolate_kwargs.call(this, arrow, [ρσ_desugar_kwargs({pos: vec(0, 1["-u"]()["*"](scale), 0), axis: vec(0, 2["*"](scale), 0), color: vec(.2, .2, .2), opacity: .2, shaftwidth: .8["*"](scale)["/"](40), headwidth: 2.4["*"](scale)["/"](40), headlength: 3.2["*"](scale)["/"](40)})]);
+    "32";
+    zaxis = ρσ_interpolate_kwargs.call(this, arrow, [ρσ_desugar_kwargs({pos: vec(0, 0, 1["-u"]()["*"](scale)), axis: vec(0, 0, 2["*"](scale)), color: vec(.2, .2, .2), opacity: .2, shaftwidth: .8["*"](scale)["/"](40), headwidth: 2.4["*"](scale)["/"](40), headlength: 3.2["*"](scale)["/"](40)})]);
+    "34";
+    ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({text: "<i>x</i>", color: vec(.2, .2, .2), pos: vec(scale["*"](1.1), 0, 0), box: false, opacity: 0})]);
+    "35";
+    ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({text: "<i>y</i>", color: vec(.2, .2, .2), pos: vec(0, scale["*"](1.1), 0), box: false, opacity: 0})]);
+    "36";
+    ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({text: "<i>z</i>", color: vec(.2, .2, .2), pos: vec(0, 0, scale["*"](1.1)), box: false, opacity: 0})]);
+    "37";
+    ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({text: "|+>", color: vec(.2, .2, .2), pos: vec(scale["*"](1.25), 0, 0), box: false, opacity: 0})]);
+    "38";
+    ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({text: "|- >", color: vec(.2, .2, .2), pos: vec(1["-u"]()["*"](scale)["*"](1.25), 0, 0), box: false, opacity: 0})]);
+    "39";
+    ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({text: "|+<i>i </i>>", color: vec(.2, .2, .2), pos: vec(0, scale["*"](1.25), 0), box: false, opacity: 0})]);
+    "40";
+    ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({text: "|-<i>i </i>>", color: vec(.2, .2, .2), pos: vec(0, 1["-u"]()["*"](scale)["*"](1.25), 0), box: false, opacity: 0})]);
+    "41";
+    ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({text: "|0>", color: vec(.2, .2, .2), pos: vec(0, 0, scale["*"](1.25)), box: false, opacity: 0})]);
+    "42";
+    ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({text: "|1>", color: vec(.2, .2, .2), pos: vec(0, 0, 1["-u"]()["*"](scale)["*"](1.25)), box: false, opacity: 0})]);
+    "44";
+    ball = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(0, 0, 0), radius: scale["*"](.9), opacity: .12})]);
+    "46";
+    pointer = ρσ_interpolate_kwargs.call(this, arrow, [ρσ_desugar_kwargs({pos: vec(0, 0, 0), axis: vec(0, 0, 1), color: vector(.8, .4, 1.5)})]);
+    "48";
+    ang = range(90);
+    "50";
+    async function fround(vect) {
+        var ρσ_ls, x, y, z;
+        "51";
+        if (abs(vect.x)["<"](Math.pow(10, 5["-u"]())) || 1["-"](1["*"](abs(vect.x)))["<"](Math.pow(10, 5["-u"]()))) {
+            "52";
+            x = round(vect.x);
+            "53";
+        } else {
+            "54";
+            x = vect.x;
+            "55";
+        }
+        if (abs(vect.y)["<"](Math.pow(10, 5["-u"]())) || 1["-"](1["*"](abs(vect.y)))["<"](Math.pow(10, 5["-u"]()))) {
+            "56";
+            y = round(vect.y);
+            "57";
+        } else {
+            "58";
+            y = vect.y;
+            "59";
+        }
+        if (abs(vect.z)["<"](Math.pow(10, 5["-u"]())) || 1["-"](1["*"](abs(vect.z)))["<"](Math.pow(10, 5["-u"]()))) {
+            "60";
+            z = round(vect.z);
+            "61";
+        } else {
+            "62";
+            z = vect.z;
+        }
+        "63";
+        return [x, y, z];
+    };
+    if (!fround.__argnames__) Object.defineProperties(fround, {
+        __argnames__ : {value: ["vect"]},
+        __module__ : {value: null}
+    });
+
+    "65";
+    async function UpdatePos(vect) {
+        var ρσ_ls, ρσ_unpack, x, y, z, theta, phi, alpha, beta_re, beta_im, al, bere, beim, p0, p1;
+        "67";
+        ρσ_unpack = (await fround(vect));
+ρσ_unpack = ρσ_unpack_asarray(3, ρσ_unpack);
+        x = ρσ_unpack[0];
+        y = ρσ_unpack[1];
+        z = ρσ_unpack[2];
+        "69";
+        theta = abs(atan(Math.pow((Math.pow(x, 2)["+"](Math.pow(y, 2))), .5)["/"](z)));
+        "70";
+        if (z["<"](0)) {
+            "71";
+            theta = pi["-"](1["*"](theta));
+        }
+        "73";
+        phi = atan2(y, x);
+        "74";
+        if ((y === 0 || typeof y === "object" && ρσ_equals(y, 0)) & ρσ_equals(x, 1["-u"]()["*"](1))) {
+            "75";
+            phi = pi;
+            "76";
+        } else if (y["<"](0)) {
+            "77";
+            phi = 2["*"](pi)["+"](phi);
+            "78";
+        }
+        if ((z === 1 || typeof z === "object" && ρσ_equals(z, 1))) {
+            "79";
+            phi = 0;
+        }
+        "83";
+        alpha = cos(theta["/"](2));
+        "84";
+        beta_re = cos(phi)["*"](sin(theta["/"](2)));
+        "85";
+        beta_im = sin(phi)["*"](sin(theta["/"](2)));
+        "86";
+        al = ""["+"](ρσ_str.format("{:.3f}", alpha))["+"]("");
+        "87";
+        bere = ""["+"](ρσ_str.format("{:.3f}", beta_re))["+"]("");
+        "88";
+        beim = ""["+"](ρσ_str.format("{:.3f}", beta_im))["+"]("");
+        "89";
+        p0 = ""["+"](ρσ_str.format("{:.2f}", Math.pow(alpha, 2)["*"](100)))["+"]("");
+        "90";
+        p1 = ""["+"](ρσ_str.format("{:.2f}", Math.pow(beta_re, 2)["+"](Math.pow(beta_im, 2))["*"](100)))["+"]("");
+        "92";
+        scene.caption = "\n";
+        "93";
+        scene.append_to_caption("\\(\\theta =\\)"["+"](round((await degrees(theta))))["+"]("\\(^{\\circ }\\)")["+"]("  ;   \\(\\phi =\\)")["+"](round((await degrees(phi))))["+"]("\\(^{\\circ }\\)")["+"]("\n\n"));
+        "94";
+        scene.append_to_caption("\\(\\alpha =\\)"["+"](al)["+"]("  ;  \\(\\beta =\\)")["+"](bere)["+"]("+")["+"](beim)["+"](" \\(i\\)")["+"]("\n\n"));
+        "95";
+        scene.append_to_caption("Probability of \\(| 0\\rangle\\):"["+"](p0)["+"]("%\n")["+"]("Probability of \\(| 1\\rangle\\):")["+"](p1)["+"]("%\n"));
+        "96";
+        scene.append_to_caption("\n* the \\(\\phi\\) value at \\(| 1\\rangle\\) \n here is just an FYI \n and not always correct!");
+        "97";
+        scene.append_to_caption("\n* 於 \\(| 1\\rangle\\) 時之 \\(\\phi\\) 值僅供參考！\n\n");
+        "99";
+        MathJax.Hub.Queue(ρσ_list_decorate([ "Typeset", MathJax.Hub ]));
+    };
+    if (!UpdatePos.__argnames__) Object.defineProperties(UpdatePos, {
+        __argnames__ : {value: ["vect"]},
+        __module__ : {value: null}
+    });
+
+    "101";
+    async function H_gate(bH) {
+        var ρσ_ls, i;
+        "102";
+        var ρσ_Iter1 = ang;
+        ρσ_Iter1 = ((typeof ρσ_Iter1[Symbol.iterator] === "function") ? (ρσ_Iter1 instanceof Map ? ρσ_Iter1.keys() : ρσ_Iter1) : Object.keys(ρσ_Iter1));
+        for (var ρσ_Index1 of ρσ_Iter1) {
+            i = ρσ_Index1;
+            "103";
+            (await rate(rot_rate));
+            "104";
+            ρσ_interpolate_kwargs.call(pointer, pointer.rotate, [ρσ_desugar_kwargs({angle: pi["/"](180)["*"](2), axis: vec(1, 0, 1)})]);
+            "105";
+            (await UpdatePos(pointer.axis));
+        }
+    };
+    if (!H_gate.__argnames__) Object.defineProperties(H_gate, {
+        __argnames__ : {value: ["bH"]},
+        __module__ : {value: null}
+    });
+
+    "107";
+    async function X_gate(bX) {
+        var ρσ_ls, i;
+        "108";
+        var ρσ_Iter2 = ang;
+        ρσ_Iter2 = ((typeof ρσ_Iter2[Symbol.iterator] === "function") ? (ρσ_Iter2 instanceof Map ? ρσ_Iter2.keys() : ρσ_Iter2) : Object.keys(ρσ_Iter2));
+        for (var ρσ_Index2 of ρσ_Iter2) {
+            i = ρσ_Index2;
+            "109";
+            (await rate(rot_rate));
+            "110";
+            ρσ_interpolate_kwargs.call(pointer, pointer.rotate, [ρσ_desugar_kwargs({angle: pi["/"](180)["*"](2), axis: vec(1, 0, 0)})]);
+            "111";
+            (await UpdatePos(pointer.axis));
+        }
+    };
+    if (!X_gate.__argnames__) Object.defineProperties(X_gate, {
+        __argnames__ : {value: ["bX"]},
+        __module__ : {value: null}
+    });
+
+    "113";
+    async function Y_gate(bY) {
+        var ρσ_ls, i;
+        "114";
+        var ρσ_Iter3 = ang;
+        ρσ_Iter3 = ((typeof ρσ_Iter3[Symbol.iterator] === "function") ? (ρσ_Iter3 instanceof Map ? ρσ_Iter3.keys() : ρσ_Iter3) : Object.keys(ρσ_Iter3));
+        for (var ρσ_Index3 of ρσ_Iter3) {
+            i = ρσ_Index3;
+            "115";
+            (await rate(rot_rate));
+            "116";
+            ρσ_interpolate_kwargs.call(pointer, pointer.rotate, [ρσ_desugar_kwargs({angle: pi["/"](180)["*"](2), axis: vec(0, 1, 0)})]);
+            "117";
+            (await UpdatePos(pointer.axis));
+        }
+    };
+    if (!Y_gate.__argnames__) Object.defineProperties(Y_gate, {
+        __argnames__ : {value: ["bY"]},
+        __module__ : {value: null}
+    });
+
+    "119";
+    async function Z_gate(bZ) {
+        var ρσ_ls, i;
+        "120";
+        var ρσ_Iter4 = ang;
+        ρσ_Iter4 = ((typeof ρσ_Iter4[Symbol.iterator] === "function") ? (ρσ_Iter4 instanceof Map ? ρσ_Iter4.keys() : ρσ_Iter4) : Object.keys(ρσ_Iter4));
+        for (var ρσ_Index4 of ρσ_Iter4) {
+            i = ρσ_Index4;
+            "121";
+            (await rate(rot_rate));
+            "122";
+            ρσ_interpolate_kwargs.call(pointer, pointer.rotate, [ρσ_desugar_kwargs({angle: pi["/"](180)["*"](2), axis: vec(0, 0, 1)})]);
+            "123";
+            (await UpdatePos(pointer.axis));
+        }
+    };
+    if (!Z_gate.__argnames__) Object.defineProperties(Z_gate, {
+        __argnames__ : {value: ["bZ"]},
+        __module__ : {value: null}
+    });
+
+    "125";
+    async function S_gate(bS) {
+        var ρσ_ls, i;
+        "126";
+        var ρσ_Iter5 = ang;
+        ρσ_Iter5 = ((typeof ρσ_Iter5[Symbol.iterator] === "function") ? (ρσ_Iter5 instanceof Map ? ρσ_Iter5.keys() : ρσ_Iter5) : Object.keys(ρσ_Iter5));
+        for (var ρσ_Index5 of ρσ_Iter5) {
+            i = ρσ_Index5;
+            "127";
+            (await rate(rot_rate["*"](1.5)));
+            "128";
+            ρσ_interpolate_kwargs.call(pointer, pointer.rotate, [ρσ_desugar_kwargs({angle: pi["/"](180), axis: vec(0, 0, 1)})]);
+            "129";
+            (await UpdatePos(pointer.axis));
+        }
+    };
+    if (!S_gate.__argnames__) Object.defineProperties(S_gate, {
+        __argnames__ : {value: ["bS"]},
+        __module__ : {value: null}
+    });
+
+    "131";
+    async function T_gate(bT) {
+        var ρσ_ls, i;
+        "132";
+        var ρσ_Iter6 = ang;
+        ρσ_Iter6 = ((typeof ρσ_Iter6[Symbol.iterator] === "function") ? (ρσ_Iter6 instanceof Map ? ρσ_Iter6.keys() : ρσ_Iter6) : Object.keys(ρσ_Iter6));
+        for (var ρσ_Index6 of ρσ_Iter6) {
+            i = ρσ_Index6;
+            "133";
+            (await rate(rot_rate["*"](2)));
+            "134";
+            ρσ_interpolate_kwargs.call(pointer, pointer.rotate, [ρσ_desugar_kwargs({angle: pi["/"](180)["/"](2), axis: vec(0, 0, 1)})]);
+            "135";
+            (await UpdatePos(pointer.axis));
+        }
+    };
+    if (!T_gate.__argnames__) Object.defineProperties(T_gate, {
+        __argnames__ : {value: ["bT"]},
+        __module__ : {value: null}
+    });
+
+    "137";
+    async function phase_gate(bP) {
+        var ρσ_ls, inputphase, i;
+        "138";
+        var ρσ_Iter7 = ang;
+        ρσ_Iter7 = ((typeof ρσ_Iter7[Symbol.iterator] === "function") ? (ρσ_Iter7 instanceof Map ? ρσ_Iter7.keys() : ρσ_Iter7) : Object.keys(ρσ_Iter7));
+        for (var ρσ_Index7 of ρσ_Iter7) {
+            i = ρσ_Index7;
+            "139";
+            inputphase = wP.number;
+            "140";
+            (await rate(rot_rate["*"](180)["/"](inputphase)));
+            "141";
+            ρσ_interpolate_kwargs.call(pointer, pointer.rotate, [ρσ_desugar_kwargs({angle: pi["/"](180)["/"](90)["*"](inputphase), axis: vec(0, 0, 1)})]);
+            "142";
+            (await UpdatePos(pointer.axis));
+        }
+    };
+    if (!phase_gate.__argnames__) Object.defineProperties(phase_gate, {
+        __argnames__ : {value: ["bP"]},
+        __module__ : {value: null}
+    });
+
+    "144";
+    async function init() {
+        "145";
+        pointer.axis = vec(0, 0, 1);
+        "146";
+        (await UpdatePos(pointer.axis));
+    };
+    if (!init.__module__) Object.defineProperties(init, {
+        __module__ : {value: null}
+    });
+
+    "150";
+    init = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "qubit init.", pos: scene.title_anchor, bind: init})]);
+    "151";
+    bH = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "H gate", pos: scene.title_anchor, bind: H_gate})]);
+    "152";
+    bX = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "X gate", pos: scene.title_anchor, bind: X_gate})]);
+    "153";
+    bY = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "Y gate", pos: scene.title_anchor, bind: Y_gate})]);
+    "154";
+    bZ = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "Z gate", pos: scene.title_anchor, bind: Z_gate})]);
+    "155";
+    bS = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "S gate", pos: scene.title_anchor, bind: S_gate})]);
+    "156";
+    bT = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "T gate", pos: scene.title_anchor, bind: T_gate})]);
+    (await sleep(.1));
+    "157";
+    wP = ρσ_interpolate_kwargs.call(this, winput, [ρσ_desugar_kwargs({pos: scene.title_anchor, bind: null, width: 30})]);
+    "158";
+    bP = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "phase gate", pos: scene.title_anchor, bind: phase_gate})]);
+};
+if (!__main__.__module__) Object.defineProperties(__main__, {
+    __module__ : {value: null}
+});
+$(function () {
+  window.__context = { glowscript_container: $("#glowscript") };
+  __main__();
+});
+})(); // END export wrapper
+// END JAVASCRIPT
   </script>
+  <!-- ========= export JS 結束 ========= -->
+</div>
+
 </body>
 </html>
