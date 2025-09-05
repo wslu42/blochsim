@@ -6,44 +6,31 @@
   <title>Web VPython on GitHub Pages</title>
 
   <!-- 本地 CSS -->
-  <link rel="stylesheet" href="./css/jquery-ui.custom.css">
-  <link rel="stylesheet" href="./css/ide.css">
+  <link rel="stylesheet" href="./css/jquery-ui.custom.css?v=dbg9">
+  <link rel="stylesheet" href="./css/ide.css?v=dbg9">
 
   <!-- 本地 jQuery + jQuery UI（先 jQuery 再 UI） -->
-  <script src="./vendor/jquery/jquery-2.1.0.min.js"></script>
-  <script src="./vendor/jquery-ui/jquery-ui.min.js"></script>
-
-  <!-- GlowScript runtime（放在 head，確保會自動掃描 x-glowscript） -->
-  <script src="./vendor/glowscript/glow.3.2.min.js"></script>
-  <script src="./vendor/glowscript/RSrun.3.2.min.js"></script>
+  <script src="./vendor/jquery/jquery-2.1.0.min.js?v=dbg9"></script>
+  <script src="./vendor/jquery-ui/jquery-ui.min.js?v=dbg9"></script>
 </head>
 <body style="margin:0">
   <!-- GlowScript 容器 -->
   <div id="glowscript" class="glowscript"></div>
 
-  <!-- 指定 GlowScript 掛載容器 -->
+  <!-- 告訴 GlowScript 要把畫面掛在上面的容器 -->
   <script>
     window.__context = { glowscript_container: $("#glowscript").removeAttr("id") };
   </script>
-
-  <!-- 最小化「活人檢查」 -->
+  
   <script>
-    (function(){
-      const TAG = 'dbg1';
-      console.log('[alive]', TAG);
-      console.log('[alive] jQuery :', typeof window.$);
-      console.log('[alive] GS blocks :', document.querySelectorAll('script[type="text/x-glowscript"]').length);
+    alert('PING 42');               // 一定會跳窗
+    console.log('HELLO 42');        // 一定會出現在 Console
+  </script>
 
-      // 只有 ?debug=1 時顯示右下角 LIVE 徽章
-      if (new URLSearchParams(location.search).get('debug') === '1') {
-        const b = document.createElement('div');
-        b.textContent = 'LIVE';
-        b.style.cssText = 'position:fixed;right:8px;bottom:8px;padding:2px 6px;font:12px/1.2 system-ui;' +
-                          'background:#28a745;color:#fff;border:1px solid #1e7e34;border-radius:4px;' +
-                          'opacity:.75;z-index:9999';
-        document.body.appendChild(b);
-      }
-    })();
+  <script>
+  console.log('jQuery:', typeof $);
+  console.log('GS container count:', $('.glowscript').length);
+  console.log('x-glowscript blocks:', document.querySelectorAll('script[type="text/x-glowscript"]').length);
   </script>
 
   <!-- 你的 GlowScript 原始碼 -->
@@ -53,5 +40,9 @@ scene = canvas(title='Hello Web VPython', width=600, height=400, background=vec(
 ball = sphere(pos=vec(0,0,0), radius=0.6, color=color.cyan, opacity=0.3)
 arr = arrow(pos=vec(0,0,0), axis=vec(1,1,1), color=color.magenta)
   </script>
+
+  <!-- 本地 GlowScript runtime（務必在最後、而且順序如下） -->
+  <script src="./vendor/glowscript/glow.3.2.min.js?v=dbg9"></script>
+  <script src="./vendor/glowscript/RSrun.3.2.min.js?v=dbg9"></script>
 </body>
 </html>
