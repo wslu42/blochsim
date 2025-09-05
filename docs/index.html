@@ -26,6 +26,10 @@
 <body>
   <div id="glowscript" class="glowscript"></div>
 
+  <script>
+    window.__context = { glowscript_container: $("#glowscript") };
+  </script>
+
   <script type="text/x-glowscript">GlowScript 3.2 VPython
 scene = canvas(title="Test Scene", width=600, height=300, background=color.white)
 
