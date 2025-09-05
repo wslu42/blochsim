@@ -1,56 +1,37 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Web VPython on GitHub Pages</title>
+  <title>GlowScript VPython Example</title>
 
-  <link rel="stylesheet" href="./css/jquery-ui.custom.css">
-  <link rel="stylesheet" href="./css/ide.css">
+  <!-- GlowScript CSS -->
+  <link rel="stylesheet" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css">
+  <link rel="stylesheet" href="https://www.glowscript.org/css/ide.css">
 
-  <script src="./vendor/jquery/jquery-2.1.0.min.js"
-          onload="console.log('jQuery loaded')"
-          onerror="console.error('jQuery FAILED')"></script>
-  <script src="./vendor/jquery-ui/jquery-ui.min.js"
-          onload="console.log('jQuery UI loaded')"
-          onerror="console.error('jQuery UI FAILED')"></script>
-  
+  <!-- jQuery + jQuery UI -->
+  <script src="https://www.glowscript.org/lib/jquery/2.1/jquery.min.js"></script>
+  <script src="https://www.glowscript.org/lib/jquery/2.1/jquery-ui.min.js"></script>
+
+  <!-- GlowScript runtime -->
   <script src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
   <script src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
-
-
 </head>
-<body style="margin:0">
-  <!-- GlowScript 容器 -->
-  <div id="glowscript" class="glowscript"></div>
+<body>
+  <!-- Your VPython code goes here -->
+  <script type="text/x-glowscript">
+  GlowScript 3.2 VPython
 
-  <!-- 告訴 GlowScript 要把畫面掛在上面的容器 -->
-  <script>
-    window.__context = { glowscript_container: $("#glowscript").removeAttr("id") };
+  scene = canvas(title="GlowScript on GitHub Pages", width=600, height=400, background=color.white)
+
+  ball = sphere(pos=vec(0,0,0), radius=0.5, color=color.cyan)
+
+  arrow(pos=vec(0,0,0), axis=vec(1,0,0), color=color.red)
+  label(pos=vec(0,1,0), text="Hello GitHub Pages!", height=16, box=False)
+
+  while True:
+      rate(60)
+      ball.pos.x = 2 * cos(scene.time)
+      ball.pos.y = 2 * sin(scene.time)
   </script>
-  
-  <script>
-    alert('PING 54');               // 一定會跳窗
-    console.log('HELLO 54');        // 一定會出現在 Console
-  </script>
-
-
-  <!-- 你的 GlowScript 原始碼 -->
-  <script type="text/x-glowscript">GlowScript 3.2 VPython
-scene = canvas(title='Hello Web VPython', width=600, height=400, background=vec(1,1,1))
-print('running')                                # 會顯示在畫布下方
-wtext(text='<b>[wtext]</b> running wtext<br>')
-label(pos=vec(0,0.8,0), text='RUNNING LABEL', height=20, color=color.black, box=False)
-scene.append_to_caption('\n[dbg] running\n')    # 追加到下方 caption
-ball = sphere(pos=vec(0,0,0), radius=0.6, color=color.cyan, opacity=0.3)
-arr = arrow(pos=vec(0,0,0), axis=vec(1,1,1), color=color.magenta)
-  </script>
-
-  <script>
-  console.log('jQuery:', typeof $);
-  console.log('GS container count:', $('.glowscript').length);
-  console.log('x-glowscript blocks:', document.querySelectorAll('script[type="text/x-glowscript"]').length);
-  </script>
-
 </body>
 </html>
