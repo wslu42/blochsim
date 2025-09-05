@@ -22,6 +22,12 @@
     window.__context = { glowscript_container: $("#glowscript").removeAttr("id") };
   </script>
 
+  <script>
+  console.log('jQuery:', typeof $);
+  console.log('GS container count:', $('.glowscript').length);
+  console.log('x-glowscript blocks:', document.querySelectorAll('script[type="text/x-glowscript"]').length);
+  </script>
+
   <!-- 你的 GlowScript 原始碼 -->
   <script type="text/x-glowscript">
 GlowScript 3.2 VPython
