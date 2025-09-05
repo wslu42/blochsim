@@ -8,33 +8,44 @@
   <link rel="stylesheet" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css">
   <link rel="stylesheet" href="https://www.glowscript.org/css/ide.css">
 
-  <!-- jQuery + jQuery UI -->
-  <script src="https://www.glowscript.org/lib/jquery/2.1/jquery.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+  <!-- jQuery + jQuery UI（與 GlowScript 3.2 相容的組合） -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
   <!-- GlowScript runtime -->
   <script src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
   <script src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
 
-  <script>
-    alert('PING 4.0');               // 一定會跳窗
-  </script>
+  <script>alert('PING 5.1');</script>
 
-  <style>#glowscript { border: 10px dashed #999; min-height: 200px; }</style>
-
+  <style>
+    /* 讓你看得到容器與畫布 */
+    #glowscript { border: 10px dashed #999; padding: 8px; }
+  </style>
 </head>
 <body>
+  <!-- 容器：一定要 class="glowscript" -->
   <div id="glowscript" class="glowscript"></div>
 
+  <!-- 將容器交給 GlowScript（放在 text/x-glowscript 之前） -->
   <script>
     window.__context = { glowscript_container: $("#glowscript") };
   </script>
 
+  <!-- 你的 GlowScript 程式（首行無前導空白） -->
   <script type="text/x-glowscript">GlowScript 3.2 VPython
-scene = canvas(title="Test Scene", width=600, height=300, background=color.white)
+scene = canvas(title="Test Scene", width=640, height=360, background=vec(1,1,1))
 
-print("GlowScript is running on GitHub Pages!")
+# 畫布中央一行黑字（在「畫布內」）
 label(pos=vec(0,0,0), text="Hello GlowScript!", height=20, color=color.black, box=False)
-</script>
+
+# 畫布內放一顆球，讓你一眼看到有東西
+sphere(pos=vec(0,0,0), radius=0.4, color=color.cyan, opacity=0.8)
+
+# 畫布下方輸出三種方式（不在瀏覽器 console）
+print("✅ GlowScript print works!")
+wtext(text="<b>[wtext]</b> hello from wtext<br>")
+scene.append_to_caption("\\n[dbg] appended caption line\\n")
+  </script>
 </body>
 </html>
