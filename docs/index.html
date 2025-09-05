@@ -17,12 +17,12 @@
 
   <script>
     (function () {
-      var el = document.getElementById('glowscript');
-      if (!el) return;
-      el.removeAttribute('id');
-      window.__context = { glowscript_container: el };
+      var $el = $("#glowscript");   // ← jQuery 物件
+      $el.removeAttr("id");
+      window.__context = { glowscript_container: $el };
     })();
   </script>
+  
 
   <script type="text/x-glowscript">
 GlowScript 3.2 VPython
