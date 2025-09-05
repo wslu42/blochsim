@@ -3,34 +3,21 @@
 <head>
   <meta charset="utf-8" />
   <title>GlowScript VPython Minimal Test</title>
+  <style>.glowscript{border:10px dashed #999; padding:8px;}</style>
+</head>
+<body>
 
-  <!-- CSS -->
+<div class="glowscript" id="glowscript">
+  <!-- CSS/JS 都放在容器內 -->
   <link rel="stylesheet" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css">
   <link rel="stylesheet" href="https://www.glowscript.org/css/ide.css">
-
-  <!-- 建議這組版本最穩 -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
-  <!-- GlowScript runtime -->
   <script src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
   <script src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
 
   <script>alert('PING 5.3');</script>
 
-  <style>#glowscript{border:10px dashed #999; padding:8px;}</style>
-</head>
-<body>
-  <div id="glowscript" class="glowscript"></div>
-
-  <!-- 關鍵：在 DOM ready 才把容器交給 GlowScript -->
-  <script>
-    $(function () {
-      window.__context = { glowscript_container: $("#glowscript") };
-    });
-  </script>
-
-  <!-- GlowScript 程式（首行不能有前導空白） -->
   <script type="text/x-glowscript">GlowScript 3.2 VPython
 scene = canvas(title="Test Scene", width=640, height=360, background=vec(1,1,1))
 label(pos=vec(0,0,0), text="Hello GlowScript!", height=20, color=color.black, box=False)
@@ -39,5 +26,7 @@ print("✅ GlowScript print works!")
 wtext(text="<b>[wtext]</b> says hi<br>")
 scene.append_to_caption("\n[dbg] appended line\n")
 </script>
+</div>
+
 </body>
 </html>
