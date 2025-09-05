@@ -1,37 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>BlochSim — GlowScript Export</title>
-
-</head>
-<body>
-
 <div id="glowscript" class="glowscript">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
-  <!-- GlowScript CSS -->
-  <link rel="stylesheet" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css">
-  <link rel="stylesheet" href="https://www.glowscript.org/css/ide.css">
-
-  <!-- MathJax（你的原始 export 就有用到） -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-  <!-- ✅ 改用穩定 CDN：jQuery 2.1.4 + jQuery UI 1.12.1 -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
-  <!-- GlowScript runtime（保持 3.2） -->
-  <script src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
-  <script src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css" rel="stylesheet" />
+<link type="text/css" href="https://www.glowscript.org/css/ide.css" rel="stylesheet" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
+<script type="text/javascript">
 
 
-  <!-- ========= 下面整段就是你的 export JS；中間內容保持不動 ========= -->
-  <script>
 // START JAVASCRIPT
 ;(function() {;
-var py_modules = {};
-py_modules.pythonize = {};
+var ρσ_modules = {};
+ρσ_modules.pythonize = {};
 
 (function(){
     function strings() {
@@ -52,8 +34,8 @@ py_modules.pythonize = {};
         if (exclude) {
             string_funcs = string_funcs.difference(set(exclude));
         }
-        var py_Iter0 = string_funcs;
-        py_Iter0 = ((typeof py_Iter0[Symbol.iterator] === "function") ? (py_Iter0 instanceof Map ? py_Iter0.keys() : py_Iter0) : Object.keys(py_Iter0));
+        var ρσ_Iter0 = string_funcs;
+        ρσ_Iter0 = ((typeof ρσ_Iter0[Symbol.iterator] === "function") ? (ρσ_Iter0 instanceof Map ? ρσ_Iter0.keys() : ρσ_Iter0) : Object.keys(ρσ_Iter0));
         for (var ρσ_Index0 of ρσ_Iter0) {
             name = ρσ_Index0;
             (ρσ_expr_temp = String.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name] = (ρσ_expr_temp = ρσ_str.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name];
@@ -448,15 +430,9 @@ async function __main__() {
 if (!__main__.__module__) Object.defineProperties(__main__, {
     __module__ : {value: null}
 });
-$(function () {
-  window.__context = { glowscript_container: $("#glowscript") };
-  __main__();
-});
-})(); // END export wrapper
-// END JAVASCRIPT
-  </script>
-  <!-- ========= export JS 結束 ========= -->
-</div>
 
-</body>
-</html>
+;$(function(){ window.__context = { glowscript_container: $("#glowscript").removeAttr("id") }; __main__() })})()
+// END JAVASCRIPT
+
+//--><!]]></script>
+</div>
