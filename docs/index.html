@@ -1,190 +1,60 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Web VPython on GitHub Pages</title>
+  <title>GlowScript VPython Minimal Test</title>
 
-  <!-- GlowScript / VPython 3.2 必要檔 -->
+  <!-- GS 需要的 CSS（版本固定） -->
+  <link rel="stylesheet" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css">
   <link rel="stylesheet" href="https://www.glowscript.org/css/ide.css">
-  <script src="https://www.glowscript.org/lib/jquery/2.1/jquery.min.js"></script>
-  <!-- 用公共 CDN 的 jQuery UI，避免 CORB -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+  <!-- jQuery 2.1.4 + jQuery UI 1.12.1：這組對 GlowScript 3.2 最穩 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+  <!-- GlowScript runtime（先 glow 再 RSrun） -->
   <script src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
   <script src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
+
+  <style>
+    /* 給容器一個可見邊框，方便觀察 */
+    #gsbox { border: 8px dashed #999; padding: 8px; }
+  </style>
+
+
 </head>
 <body>
-  <div id="glowscript" class="glowscript"></div>
 
-  <!-- ★ 不用 jQuery，純 DOM 指定容器（GlowScript 需要這一步） -->
+  <!-- 唯一容器：class 必須是 glowscript；id 隨意（這裡用 gsbox） -->
+  <div id="gsbox" class="glowscript"></div>
+
+  <!-- 關鍵：把容器交給 GlowScript；放在 GS 腳本之前，且在 DOM ready 時做 -->
   <script>
-    (function () {
-      var el = document.getElementById('glowscript');
-      el.removeAttribute('id');                // GlowScript 會把 id 當內部使用，需移除
-      window.__context = { glowscript_container: el };
-    })();
+    $(function () {
+      window.__context = { glowscript_container: $("#gsbox") };
+    });
   </script>
 
-  <script type="text/x-glowscript">
-GlowScript 3.2 VPython
-# Created By : Hong-Yi, Yang
-# Master Student in Professor Watson Kuo's lab (郭華丞老師), NCHU, Taiwan
-# Source code webpage: https://www.glowscript.org/#/user/Derek625/folder/MyPrograms/program/BlochSphere/edit
-
-scene = canvas(title='original code owner: <b>Hong-Yi Yang</b>. Master Student at NCHU, Taiwan\n', width=400, height=400, x=0, y=0, center=vec(0, 0, 0),background=vec(1,1,1), align='left')
-scene.append_to_title('adopted and modified by Wen-Sen Lu, IBM Quantum\n\n')
-
-scene.append_to_title('Manual -- Drag with right click: rotate; Scroll: zoom; Left click + Shift: pan\n')
-scene.append_to_title('使用說明 -- 滑鼠右鍵: 旋轉視角; 滾輪: 縮放畫面; 左鍵+Shift: 平移\n\n')
-scene.append_to_title('\\(| \\Psi \\rangle =\\alpha \\left| 0\\rangle +\\beta \\right| 1\\rangle\\)'+'\\(\\quad\\quad\\quad\\)')
-scene.append_to_title('\\(\\alpha =\\cos \\dfrac{\\theta }{2}\\)'+'  ;  '+'\\(\\beta =e^{i\\phi }\\sin \\dfrac{\\theta }{2}\\)'+'\n\n')
-
-scene.camera.rotate(angle=pi/2, axis=vec(1,0,0))
-scene.camera.rotate(angle=pi*3/4, axis=vec(0,0,1))
-scene.camera.rotate(angle=pi/15, axis=vec(1,-1,0))
-scene.center=vector(0,0,0.25)
-
-scene.caption = '\n'
-scene.append_to_caption("\\(\\theta = 0\\)"+"\\(^{\\circ }\\)"+"  ;  \\(\\phi = 0\\)"+"\\(^{\\circ }\\)"+'\n\n')
-scene.append_to_caption('\\(\\alpha = 1\\)  ;  \\(\\beta = 0 + 0i\\) \n\n')
-scene.append_to_caption('Probability of \\(| 0\\rangle\\): 100%\n'+'Probability of \\(| 1\\rangle\\): 0%\n') 
-scene.append_to_caption('\n* the \\(\\phi\\) value at \\(| 1\\rangle\\) \n here is just an FYI \n and not always correct!')
-scene.append_to_caption('\n* 於 \\(| 1\\rangle\\) 時之 \\(\\phi\\) 值僅供參考！\n\n')
-
-MathJax.Hub.Queue(["Typeset",MathJax.Hub])
-
-scale = 1.25
-rot_rate = 120
-xaxis = arrow(pos=vec(-scale,0,0), axis=vec(2*scale,0,0), color=vec(0.2,0.2,0.2), opacity=0.2, shaftwidth=0.8*scale/40, headwidth=2.4*scale/40, headlength=3.2*scale/40 )
-yaxis = arrow(pos=vec(0,-scale,0), axis=vec(0,2*scale,0), color=vec(0.2,0.2,0.2), opacity=0.2, shaftwidth=0.8*scale/40, headwidth=2.4*scale/40, headlength=3.2*scale/40 )
-zaxis = arrow(pos=vec(0,0,-scale), axis=vec(0,0,2*scale), color=vec(0.2,0.2,0.2), opacity=0.2, shaftwidth=0.8*scale/40, headwidth=2.4*scale/40, headlength=3.2*scale/40 )
-
-label(text='<i>x</i>', color=vec(0.2,0.2,0.2), pos=vec(scale*1.1,0,0), box=False, opacity=0)
-label(text='<i>y</i>', color=vec(0.2,0.2,0.2), pos=vec(0,scale*1.1,0), box=False, opacity=0)
-label(text='<i>z</i>', color=vec(0.2,0.2,0.2), pos=vec(0,0,scale*1.1), box=False, opacity=0)
-label(text='|+>', color=vec(0.2,0.2,0.2), pos=vec(scale*1.25,0,0), box=False, opacity=0)
-label(text='|- >', color=vec(0.2,0.2,0.2), pos=vec(-scale*1.25,0,0), box=False, opacity=0)
-label(text='|+<i>i </i>>', color=vec(0.2,0.2,0.2), pos=vec(0,scale*1.25,0), box=False, opacity=0)
-label(text='|-<i>i </i>>', color=vec(0.2,0.2,0.2), pos=vec(0,-scale*1.25,0), box=False, opacity=0)
-label(text='|0>', color=vec(0.2,0.2,0.2), pos=vec(0,0,scale*1.25), box=False, opacity=0)
-label(text='|1>', color=vec(0.2,0.2,0.2), pos=vec(0,0,-scale*1.25), box=False, opacity=0)
-
-ball = sphere(pos=vec(0,0,0), radius=scale*0.9, opacity=0.12)
-
-pointer = arrow(pos=vec(0,0,0), axis=vec(0,0,1), color=vector(0.8,0.4,1.5))
-
-ang = range(90)
-
-def fround(vect):
-    if abs(vect.x) < 10**-5 or 1-abs(vect.x) < 10**-5:
-        x = round(vect.x)
-    else:
-        x = vect.x
-    if abs(vect.y) < 10**-5 or 1-abs(vect.y) < 10**-5:
-        y = round(vect.y)
-    else:
-        y = vect.y
-    if abs(vect.z) < 10**-5 or 1-abs(vect.z) < 10**-5:
-        z = round(vect.z)
-    else:
-        z = vect.z
-    return x, y, z
-
-def UpdatePos(vect):
-    #state = fround(vect)
-    x, y, z = fround(vect)
-    
-    theta = abs(atan((x**2+y**2)**0.5/z))
-    if z < 0:
-        theta = pi-theta
-        
-    phi = atan2(y,x)
-    if y == 0 & x == -1:
-        phi = pi
-    else if y < 0:
-        phi = 2*pi+phi
-    if z == 1:
-        phi = 0
-    #else if z == -1:
-     #   phi = 0
-     
-    alpha = cos(theta/2)
-    beta_re = cos(phi)*sin(theta/2)
-    beta_im =sin(phi)*sin(theta/2)
-    al = f"{alpha:.3f}"
-    bere = f"{beta_re:.3f}"
-    beim = f"{beta_im:.3f}"
-    p0 = f"{alpha**2*100:.2f}"
-    p1 = f"{(beta_re**2+beta_im**2)*100:.2f}"
-
-    scene.caption = '\n'
-    scene.append_to_caption("\\(\\theta =\\)"+round(degrees(theta))+"\\(^{\\circ }\\)"+"  ;   \\(\\phi =\\)"+round(degrees(phi))+"\\(^{\\circ }\\)"+'\n\n')
-    scene.append_to_caption("\\(\\alpha =\\)"+al+"  ;  \\(\\beta =\\)"+bere+'+'+beim+" \\(i\\)"+'\n\n')
-    scene.append_to_caption("Probability of \\(| 0\\rangle\\):"+p0+'%\n'+"Probability of \\(| 1\\rangle\\):"+p1+'%\n')
-    scene.append_to_caption('\n* the \\(\\phi\\) value at \\(| 1\\rangle\\) \n here is just an FYI \n and not always correct!')
-    scene.append_to_caption('\n* 於 \\(| 1\\rangle\\) 時之 \\(\\phi\\) 值僅供參考！\n\n')
-    
-    MathJax.Hub.Queue(["Typeset",MathJax.Hub])
-
-def H_gate(bH):
-    for i in ang:
-        rate(rot_rate)
-        pointer.rotate(angle=pi/180*2, axis=vec(1,0,1))
-        UpdatePos(pointer.axis)
-
-def X_gate(bX):
-    for i in ang:
-        rate(rot_rate)
-        pointer.rotate(angle=pi/180*2, axis=vec(1,0,0))
-        UpdatePos(pointer.axis)
-
-def Y_gate(bY):
-    for i in ang:
-        rate(rot_rate)
-        pointer.rotate(angle=pi/180*2, axis=vec(0,1,0))
-        UpdatePos(pointer.axis)
-
-def Z_gate(bZ):
-    for i in ang:
-        rate(rot_rate)
-        pointer.rotate(angle=pi/180*2, axis=vec(0,0,1))
-        UpdatePos(pointer.axis)
-
-def S_gate(bS):
-    for i in ang:
-        rate(rot_rate*1.5)
-        pointer.rotate(angle=pi/180, axis=vec(0,0,1))
-        UpdatePos(pointer.axis)
-
-def T_gate(bT):
-    for i in ang:
-        rate(rot_rate*2)
-        pointer.rotate(angle=pi/180/2, axis=vec(0,0,1))
-        UpdatePos(pointer.axis)
-
-def phase_gate(bP):
-    for i in ang:
-        inputphase = wP.number
-        rate(rot_rate*180/inputphase)
-        pointer.rotate(angle=pi/180/90*inputphase, axis=vec(0,0,1))
-        UpdatePos(pointer.axis)
-
-def init():
-    pointer.axis=vec(0,0,1)
-    UpdatePos(pointer.axis)
-
-
-
-init = button(text='qubit init.', pos=scene.title_anchor, bind=init)
-bH = button(text='H gate', pos=scene.title_anchor, bind=H_gate)
-bX = button(text='X gate', pos=scene.title_anchor, bind=X_gate)
-bY = button(text='Y gate', pos=scene.title_anchor, bind=Y_gate)
-bZ = button(text='Z gate', pos=scene.title_anchor, bind=Z_gate)
-bS = button(text='S gate', pos=scene.title_anchor, bind=S_gate)
-bT = button(text='T gate', pos=scene.title_anchor, bind=T_gate)
-wP = winput(pos=scene.title_anchor, bind=None, width=30)
-bP = button(text='phase gate', pos=scene.title_anchor, bind=phase_gate)
-
+  <script>
+  $(function(){
+    console.log("DBG:", typeof window.RSrun, $(".glowscript").length);
+  });
   </script>
+
+
+  <!-- 你的 GlowScript 程式（首行必為這句，前面不能有空白/註解） -->
+  <script type="text/x-glowscript">GlowScript 3.2 VPython
+scene = canvas(title="Test Scene", width=640, height=360, background=vec(1,1,1))
+
+# 畫布內看得見的東西
+label(pos=vec(0,0,0), text="Hello GlowScript!", height=20, color=color.black, box=False)
+sphere(pos=vec(0,0,0), radius=0.4, color=color.cyan, opacity=0.8)
+
+# 畫布下方的三種輸出（不在瀏覽器 Console）
+print("✅ GlowScript print works!")
+wtext(text="<b>[wtext]</b> hello from wtext<br>")
+scene.append_to_caption("\\n[dbg] appended caption line\\n")
+</script>
+
 </body>
 </html>
