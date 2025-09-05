@@ -44,11 +44,12 @@
 GlowScript 3.2 VPython
 scene = canvas(title='Hello Web VPython', width=600, height=400, background=vec(1,1,1))
 print('running')                                # 會顯示在畫布下方
+wtext(text='<b>[wtext]</b> running wtext<br>')
+label(pos=vec(0,0.8,0), text='RUNNING LABEL', height=20, color=color.black, box=False)
 scene.append_to_caption('\n[dbg] running\n')    # 追加到下方 caption
 ball = sphere(pos=vec(0,0,0), radius=0.6, color=color.cyan, opacity=0.3)
 arr = arrow(pos=vec(0,0,0), axis=vec(1,1,1), color=color.magenta)
-
-</script>
+  </script>
 
   <script>
   console.log('jQuery:', typeof $);
