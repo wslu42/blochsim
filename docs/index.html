@@ -8,11 +8,21 @@
   <link rel="stylesheet" href="./css/jquery-ui.custom.css">
   <link rel="stylesheet" href="./css/ide.css">
 
-  <script src="./vendor/jquery/jquery-2.1.0.min.js"></script>
-  <script src="./vendor/jquery-ui/jquery-ui.min.js"></script>
+  <script src="./vendor/jquery/jquery-2.1.0.min.js"
+          onload="console.log('jQuery loaded')"
+          onerror="console.error('jQuery FAILED')"></script>
+  <script src="./vendor/jquery-ui/jquery-ui.min.js"
+          onload="console.log('jQuery UI loaded')"
+          onerror="console.error('jQuery UI FAILED')"></script>
   
-  <script src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
-  <script src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
+  <script src="./vendor/glowscript/glow.3.2.min.js"
+          onload="console.log('Glow loaded')"
+          onerror="console.error('Glow FAILED')"></script>
+  <script src="./vendor/glowscript/RSrun.3.2.min.js"
+          onload="console.log('RSrun loaded')"
+          onerror="console.error('RSrun FAILED')"></script>
+
+
 </head>
 <body style="margin:0">
   <!-- GlowScript 容器 -->
@@ -24,8 +34,8 @@
   </script>
   
   <script>
-    alert('PING 44');               // 一定會跳窗
-    console.log('HELLO 44');        // 一定會出現在 Console
+    alert('PING 45');               // 一定會跳窗
+    console.log('HELLO 45');        // 一定會出現在 Console
   </script>
 
   <script>
