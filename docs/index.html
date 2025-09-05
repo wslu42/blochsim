@@ -39,7 +39,7 @@ py_modules.pythonize = {};
         string_funcs = set("capitalize strip lstrip rstrip islower isupper isspace lower upper swapcase center count endswith startswith find rfind index rindex format join ljust rjust partition rpartition replace split rsplit splitlines zfill".split(" "));
         if (!arguments.length) {
             exclude = (function(){
-                var s = py_set();
+                var s = ρσ_set();
                 s.jsset.add("split");
                 s.jsset.add("replace");
                 return s;
@@ -54,16 +54,16 @@ py_modules.pythonize = {};
         }
         var py_Iter0 = string_funcs;
         py_Iter0 = ((typeof py_Iter0[Symbol.iterator] === "function") ? (py_Iter0 instanceof Map ? py_Iter0.keys() : py_Iter0) : Object.keys(py_Iter0));
-        for (var py_Index0 of py_Iter0) {
-            name = py_Index0;
-            (py_expr_temp = String.prototype)[(typeof name === "number" && name < 0) ? py_expr_temp.length + name : name] = (py_expr_temp = py_str.prototype)[(typeof name === "number" && name < 0) ? py_expr_temp.length + name : name];
+        for (var ρσ_Index0 of ρσ_Iter0) {
+            name = ρσ_Index0;
+            (ρσ_expr_temp = String.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name] = (ρσ_expr_temp = ρσ_str.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name];
         }
     };
     if (!strings.__module__) Object.defineProperties(strings, {
         __module__ : {value: "pythonize"}
     });
 
-    py_modules.pythonize.strings = strings;
+    ρσ_modules.pythonize.strings = strings;
 })();
 async function __main__() {
 "use strict";
@@ -79,8 +79,8 @@ async function __main__() {
     	else return prompt()
     }
 
-    var version, print, arange, __name__, type, py_ls, scene, scale, rot_rate, xaxis, yaxis, zaxis, ball, pointer, ang, init, bH, bX, bY, bZ, bS, bT, wP, bP;
-    version = py_list_decorate([ "3.2", "glowscript" ]);
+    var version, print, arange, __name__, type, ρσ_ls, scene, scale, rot_rate, xaxis, yaxis, zaxis, ball, pointer, ang, init, bH, bX, bY, bZ, bS, bT, wP, bP;
+    version = ρσ_list_decorate([ "3.2", "glowscript" ]);
     Array.prototype['+'] = function(r) {return this.concat(r)}
     Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
     window.__GSlang = "vpython";
@@ -88,11 +88,11 @@ async function __main__() {
     arange = range;
     __name__ = "__main__";
     type = pytype;
-    var strings = py_modules.pythonize.strings;
+    var strings = ρσ_modules.pythonize.strings;
 
     strings();
     "6";
-    scene = py_interpolate_kwargs.call(this, canvas, [py_desugar_kwargs({title: "original code owner: <b>Hong-Yi Yang<\/b>. Master Student at NCHU, Taiwan\n", width: 400, height: 400, x: 0, y: 0, center: vec(0, 0, 0), background: vec(1, 1, 1), align: "left"})]);
+    scene = ρσ_interpolate_kwargs.call(this, canvas, [ρσ_desugar_kwargs({title: "original code owner: <b>Hong-Yi Yang<\/b>. Master Student at NCHU, Taiwan\n", width: 400, height: 400, x: 0, y: 0, center: vec(0, 0, 0), background: vec(1, 1, 1), align: "left"})]);
     "7";
     scene.append_to_title("adopted and modified by Wen-Sen Lu, IBM Quantum\n\n");
     "9";
@@ -104,11 +104,11 @@ async function __main__() {
     "12";
     scene.append_to_title("\\(\\alpha =\\cos \\dfrac{\\theta }{2}\\)"["+"]("  ;  ")["+"]("\\(\\beta =e^{i\\phi }\\sin \\dfrac{\\theta }{2}\\)")["+"]("\n\n"));
     "14";
-    py_interpolate_kwargs.call(scene.camera, scene.camera.rotate, [py_desugar_kwargs({angle: pi["/"](2), axis: vec(1, 0, 0)})]);
+    ρσ_interpolate_kwargs.call(scene.camera, scene.camera.rotate, [ρσ_desugar_kwargs({angle: pi["/"](2), axis: vec(1, 0, 0)})]);
     "15";
-    py_interpolate_kwargs.call(scene.camera, scene.camera.rotate, [py_desugar_kwargs({angle: pi["*"](3)["/"](4), axis: vec(0, 0, 1)})]);
+    ρσ_interpolate_kwargs.call(scene.camera, scene.camera.rotate, [ρσ_desugar_kwargs({angle: pi["*"](3)["/"](4), axis: vec(0, 0, 1)})]);
     "16";
-    py_interpolate_kwargs.call(scene.camera, scene.camera.rotate, [py_desugar_kwargs({angle: pi["/"](15), axis: vec(1, 1["-u"]()["*"](1), 0)})]);
+    ρσ_interpolate_kwargs.call(scene.camera, scene.camera.rotate, [ρσ_desugar_kwargs({angle: pi["/"](15), axis: vec(1, 1["-u"]()["*"](1), 0)})]);
     "17";
     scene.center = vector(0, 0, .25);
     "19";
@@ -124,44 +124,44 @@ async function __main__() {
     "24";
     scene.append_to_caption("\n* 於 \\(| 1\\rangle\\) 時之 \\(\\phi\\) 值僅供參考！\n\n");
     "26";
-    MathJax.Hub.Queue(py_list_decorate([ "Typeset", MathJax.Hub ]));
+    MathJax.Hub.Queue(ρσ_list_decorate([ "Typeset", MathJax.Hub ]));
     "28";
     scale = 1.25;
     "29";
     rot_rate = 120;
     "30";
-    xaxis = py_interpolate_kwargs.call(this, arrow, [py_desugar_kwargs({pos: vec(1["-u"]()["*"](scale), 0, 0), axis: vec(2["*"](scale), 0, 0), color: vec(.2, .2, .2), opacity: .2, shaftwidth: .8["*"](scale)["/"](40), headwidth: 2.4["*"](scale)["/"](40), headlength: 3.2["*"](scale)["/"](40)})]);
+    xaxis = ρσ_interpolate_kwargs.call(this, arrow, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](scale), 0, 0), axis: vec(2["*"](scale), 0, 0), color: vec(.2, .2, .2), opacity: .2, shaftwidth: .8["*"](scale)["/"](40), headwidth: 2.4["*"](scale)["/"](40), headlength: 3.2["*"](scale)["/"](40)})]);
     "31";
-    yaxis = py_interpolate_kwargs.call(this, arrow, [py_desugar_kwargs({pos: vec(0, 1["-u"]()["*"](scale), 0), axis: vec(0, 2["*"](scale), 0), color: vec(.2, .2, .2), opacity: .2, shaftwidth: .8["*"](scale)["/"](40), headwidth: 2.4["*"](scale)["/"](40), headlength: 3.2["*"](scale)["/"](40)})]);
+    yaxis = ρσ_interpolate_kwargs.call(this, arrow, [ρσ_desugar_kwargs({pos: vec(0, 1["-u"]()["*"](scale), 0), axis: vec(0, 2["*"](scale), 0), color: vec(.2, .2, .2), opacity: .2, shaftwidth: .8["*"](scale)["/"](40), headwidth: 2.4["*"](scale)["/"](40), headlength: 3.2["*"](scale)["/"](40)})]);
     "32";
-    zaxis = py_interpolate_kwargs.call(this, arrow, [py_desugar_kwargs({pos: vec(0, 0, 1["-u"]()["*"](scale)), axis: vec(0, 0, 2["*"](scale)), color: vec(.2, .2, .2), opacity: .2, shaftwidth: .8["*"](scale)["/"](40), headwidth: 2.4["*"](scale)["/"](40), headlength: 3.2["*"](scale)["/"](40)})]);
+    zaxis = ρσ_interpolate_kwargs.call(this, arrow, [ρσ_desugar_kwargs({pos: vec(0, 0, 1["-u"]()["*"](scale)), axis: vec(0, 0, 2["*"](scale)), color: vec(.2, .2, .2), opacity: .2, shaftwidth: .8["*"](scale)["/"](40), headwidth: 2.4["*"](scale)["/"](40), headlength: 3.2["*"](scale)["/"](40)})]);
     "34";
-    py_interpolate_kwargs.call(this, label, [py_desugar_kwargs({text: "<i>x</i>", color: vec(.2, .2, .2), pos: vec(scale["*"](1.1), 0, 0), box: false, opacity: 0})]);
+    ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({text: "<i>x</i>", color: vec(.2, .2, .2), pos: vec(scale["*"](1.1), 0, 0), box: false, opacity: 0})]);
     "35";
-    py_interpolate_kwargs.call(this, label, [py_desugar_kwargs({text: "<i>y</i>", color: vec(.2, .2, .2), pos: vec(0, scale["*"](1.1), 0), box: false, opacity: 0})]);
+    ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({text: "<i>y</i>", color: vec(.2, .2, .2), pos: vec(0, scale["*"](1.1), 0), box: false, opacity: 0})]);
     "36";
-    py_interpolate_kwargs.call(this, label, [py_desugar_kwargs({text: "<i>z</i>", color: vec(.2, .2, .2), pos: vec(0, 0, scale["*"](1.1)), box: false, opacity: 0})]);
+    ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({text: "<i>z</i>", color: vec(.2, .2, .2), pos: vec(0, 0, scale["*"](1.1)), box: false, opacity: 0})]);
     "37";
-    py_interpolate_kwargs.call(this, label, [py_desugar_kwargs({text: "|+>", color: vec(.2, .2, .2), pos: vec(scale["*"](1.25), 0, 0), box: false, opacity: 0})]);
+    ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({text: "|+>", color: vec(.2, .2, .2), pos: vec(scale["*"](1.25), 0, 0), box: false, opacity: 0})]);
     "38";
-    py_interpolate_kwargs.call(this, label, [py_desugar_kwargs({text: "|- >", color: vec(.2, .2, .2), pos: vec(1["-u"]()["*"](scale)["*"](1.25), 0, 0), box: false, opacity: 0})]);
+    ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({text: "|- >", color: vec(.2, .2, .2), pos: vec(1["-u"]()["*"](scale)["*"](1.25), 0, 0), box: false, opacity: 0})]);
     "39";
-    py_interpolate_kwargs.call(this, label, [py_desugar_kwargs({text: "|+<i>i </i>>", color: vec(.2, .2, .2), pos: vec(0, scale["*"](1.25), 0), box: false, opacity: 0})]);
+    ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({text: "|+<i>i </i>>", color: vec(.2, .2, .2), pos: vec(0, scale["*"](1.25), 0), box: false, opacity: 0})]);
     "40";
-    py_interpolate_kwargs.call(this, label, [py_desugar_kwargs({text: "|-<i>i </i>>", color: vec(.2, .2, .2), pos: vec(0, 1["-u"]()["*"](scale)["*"](1.25), 0), box: false, opacity: 0})]);
+    ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({text: "|-<i>i </i>>", color: vec(.2, .2, .2), pos: vec(0, 1["-u"]()["*"](scale)["*"](1.25), 0), box: false, opacity: 0})]);
     "41";
-    py_interpolate_kwargs.call(this, label, [py_desugar_kwargs({text: "|0>", color: vec(.2, .2, .2), pos: vec(0, 0, scale["*"](1.25)), box: false, opacity: 0})]);
+    ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({text: "|0>", color: vec(.2, .2, .2), pos: vec(0, 0, scale["*"](1.25)), box: false, opacity: 0})]);
     "42";
-    py_interpolate_kwargs.call(this, label, [py_desugar_kwargs({text: "|1>", color: vec(.2, .2, .2), pos: vec(0, 0, 1["-u"]()["*"](scale)["*"](1.25)), box: false, opacity: 0})]);
+    ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({text: "|1>", color: vec(.2, .2, .2), pos: vec(0, 0, 1["-u"]()["*"](scale)["*"](1.25)), box: false, opacity: 0})]);
     "44";
-    ball = py_interpolate_kwargs.call(this, sphere, [py_desugar_kwargs({pos: vec(0, 0, 0), radius: scale["*"](.9), opacity: .12})]);
+    ball = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vec(0, 0, 0), radius: scale["*"](.9), opacity: .12})]);
     "46";
-    pointer = py_interpolate_kwargs.call(this, arrow, [py_desugar_kwargs({pos: vec(0, 0, 0), axis: vec(0, 0, 1), color: vector(.8, .4, 1.5)})]);
+    pointer = ρσ_interpolate_kwargs.call(this, arrow, [ρσ_desugar_kwargs({pos: vec(0, 0, 0), axis: vec(0, 0, 1), color: vector(.8, .4, 1.5)})]);
     "48";
     ang = range(90);
     "50";
     async function fround(vect) {
-        var py_ls, x, y, z;
+        var ρσ_ls, x, y, z;
         "51";
         if (abs(vect.x)["<"](Math.pow(10, 5["-u"]())) || 1["-"](1["*"](abs(vect.x)))["<"](Math.pow(10, 5["-u"]()))) {
             "52";
@@ -199,13 +199,13 @@ async function __main__() {
 
     "65";
     async function UpdatePos(vect) {
-        var py_ls, py_unpack, x, y, z, theta, phi, alpha, beta_re, beta_im, al, bere, beim, p0, p1;
+        var ρσ_ls, ρσ_unpack, x, y, z, theta, phi, alpha, beta_re, beta_im, al, bere, beim, p0, p1;
         "67";
-        py_unpack = (await fround(vect));
-py_unpack = py_unpack_asarray(3, py_unpack);
-        x = py_unpack[0];
-        y = py_unpack[1];
-        z = py_unpack[2];
+        ρσ_unpack = (await fround(vect));
+ρσ_unpack = ρσ_unpack_asarray(3, ρσ_unpack);
+        x = ρσ_unpack[0];
+        y = ρσ_unpack[1];
+        z = ρσ_unpack[2];
         "69";
         theta = abs(atan(Math.pow((Math.pow(x, 2)["+"](Math.pow(y, 2))), .5)["/"](z)));
         "70";
@@ -216,7 +216,7 @@ py_unpack = py_unpack_asarray(3, py_unpack);
         "73";
         phi = atan2(y, x);
         "74";
-        if ((y === 0 || typeof y === "object" && py_equals(y, 0)) & py_equals(x, 1["-u"]()["*"](1))) {
+        if ((y === 0 || typeof y === "object" && ρσ_equals(y, 0)) & ρσ_equals(x, 1["-u"]()["*"](1))) {
             "75";
             phi = pi;
             "76";
@@ -225,7 +225,7 @@ py_unpack = py_unpack_asarray(3, py_unpack);
             phi = 2["*"](pi)["+"](phi);
             "78";
         }
-        if ((z === 1 || typeof z === "object" && py_equals(z, 1))) {
+        if ((z === 1 || typeof z === "object" && ρσ_equals(z, 1))) {
             "79";
             phi = 0;
         }
@@ -236,15 +236,15 @@ py_unpack = py_unpack_asarray(3, py_unpack);
         "85";
         beta_im = sin(phi)["*"](sin(theta["/"](2)));
         "86";
-        al = ""["+"](py_str.format("{:.3f}", alpha))["+"]("");
+        al = ""["+"](ρσ_str.format("{:.3f}", alpha))["+"]("");
         "87";
-        bere = ""["+"](py_str.format("{:.3f}", beta_re))["+"]("");
+        bere = ""["+"](ρσ_str.format("{:.3f}", beta_re))["+"]("");
         "88";
-        beim = ""["+"](py_str.format("{:.3f}", beta_im))["+"]("");
+        beim = ""["+"](ρσ_str.format("{:.3f}", beta_im))["+"]("");
         "89";
-        p0 = ""["+"](py_str.format("{:.2f}", Math.pow(alpha, 2)["*"](100)))["+"]("");
+        p0 = ""["+"](ρσ_str.format("{:.2f}", Math.pow(alpha, 2)["*"](100)))["+"]("");
         "90";
-        p1 = ""["+"](py_str.format("{:.2f}", Math.pow(beta_re, 2)["+"](Math.pow(beta_im, 2))["*"](100)))["+"]("");
+        p1 = ""["+"](ρσ_str.format("{:.2f}", Math.pow(beta_re, 2)["+"](Math.pow(beta_im, 2))["*"](100)))["+"]("");
         "92";
         scene.caption = "\n";
         "93";
@@ -258,7 +258,7 @@ py_unpack = py_unpack_asarray(3, py_unpack);
         "97";
         scene.append_to_caption("\n* 於 \\(| 1\\rangle\\) 時之 \\(\\phi\\) 值僅供參考！\n\n");
         "99";
-        MathJax.Hub.Queue(py_list_decorate([ "Typeset", MathJax.Hub ]));
+        MathJax.Hub.Queue(ρσ_list_decorate([ "Typeset", MathJax.Hub ]));
     };
     if (!UpdatePos.__argnames__) Object.defineProperties(UpdatePos, {
         __argnames__ : {value: ["vect"]},
@@ -267,16 +267,16 @@ py_unpack = py_unpack_asarray(3, py_unpack);
 
     "101";
     async function H_gate(bH) {
-        var py_ls, i;
+        var ρσ_ls, i;
         "102";
-        var py_Iter1 = ang;
-        py_Iter1 = ((typeof py_Iter1[Symbol.iterator] === "function") ? (py_Iter1 instanceof Map ? py_Iter1.keys() : py_Iter1) : Object.keys(py_Iter1));
-        for (var py_Index1 of py_Iter1) {
-            i = py_Index1;
+        var ρσ_Iter1 = ang;
+        ρσ_Iter1 = ((typeof ρσ_Iter1[Symbol.iterator] === "function") ? (ρσ_Iter1 instanceof Map ? ρσ_Iter1.keys() : ρσ_Iter1) : Object.keys(ρσ_Iter1));
+        for (var ρσ_Index1 of ρσ_Iter1) {
+            i = ρσ_Index1;
             "103";
             (await rate(rot_rate));
             "104";
-            py_interpolate_kwargs.call(pointer, pointer.rotate, [py_desugar_kwargs({angle: pi["/"](180)["*"](2), axis: vec(1, 0, 1)})]);
+            ρσ_interpolate_kwargs.call(pointer, pointer.rotate, [ρσ_desugar_kwargs({angle: pi["/"](180)["*"](2), axis: vec(1, 0, 1)})]);
             "105";
             (await UpdatePos(pointer.axis));
         }
@@ -288,16 +288,16 @@ py_unpack = py_unpack_asarray(3, py_unpack);
 
     "107";
     async function X_gate(bX) {
-        var py_ls, i;
+        var ρσ_ls, i;
         "108";
-        var py_Iter2 = ang;
-        py_Iter2 = ((typeof py_Iter2[Symbol.iterator] === "function") ? (py_Iter2 instanceof Map ? py_Iter2.keys() : py_Iter2) : Object.keys(py_Iter2));
-        for (var py_Index2 of py_Iter2) {
-            i = py_Index2;
+        var ρσ_Iter2 = ang;
+        ρσ_Iter2 = ((typeof ρσ_Iter2[Symbol.iterator] === "function") ? (ρσ_Iter2 instanceof Map ? ρσ_Iter2.keys() : ρσ_Iter2) : Object.keys(ρσ_Iter2));
+        for (var ρσ_Index2 of ρσ_Iter2) {
+            i = ρσ_Index2;
             "109";
             (await rate(rot_rate));
             "110";
-            py_interpolate_kwargs.call(pointer, pointer.rotate, [py_desugar_kwargs({angle: pi["/"](180)["*"](2), axis: vec(1, 0, 0)})]);
+            ρσ_interpolate_kwargs.call(pointer, pointer.rotate, [ρσ_desugar_kwargs({angle: pi["/"](180)["*"](2), axis: vec(1, 0, 0)})]);
             "111";
             (await UpdatePos(pointer.axis));
         }
@@ -309,16 +309,16 @@ py_unpack = py_unpack_asarray(3, py_unpack);
 
     "113";
     async function Y_gate(bY) {
-        var py_ls, i;
+        var ρσ_ls, i;
         "114";
-        var py_Iter3 = ang;
-        py_Iter3 = ((typeof py_Iter3[Symbol.iterator] === "function") ? (py_Iter3 instanceof Map ? py_Iter3.keys() : py_Iter3) : Object.keys(py_Iter3));
-        for (var py_Index3 of py_Iter3) {
-            i = py_Index3;
+        var ρσ_Iter3 = ang;
+        ρσ_Iter3 = ((typeof ρσ_Iter3[Symbol.iterator] === "function") ? (ρσ_Iter3 instanceof Map ? ρσ_Iter3.keys() : ρσ_Iter3) : Object.keys(ρσ_Iter3));
+        for (var ρσ_Index3 of ρσ_Iter3) {
+            i = ρσ_Index3;
             "115";
             (await rate(rot_rate));
             "116";
-            py_interpolate_kwargs.call(pointer, pointer.rotate, [py_desugar_kwargs({angle: pi["/"](180)["*"](2), axis: vec(0, 1, 0)})]);
+            ρσ_interpolate_kwargs.call(pointer, pointer.rotate, [ρσ_desugar_kwargs({angle: pi["/"](180)["*"](2), axis: vec(0, 1, 0)})]);
             "117";
             (await UpdatePos(pointer.axis));
         }
@@ -330,16 +330,16 @@ py_unpack = py_unpack_asarray(3, py_unpack);
 
     "119";
     async function Z_gate(bZ) {
-        var py_ls, i;
+        var ρσ_ls, i;
         "120";
-        var py_Iter4 = ang;
-        py_Iter4 = ((typeof py_Iter4[Symbol.iterator] === "function") ? (py_Iter4 instanceof Map ? py_Iter4.keys() : py_Iter4) : Object.keys(py_Iter4));
-        for (var py_Index4 of py_Iter4) {
-            i = py_Index4;
+        var ρσ_Iter4 = ang;
+        ρσ_Iter4 = ((typeof ρσ_Iter4[Symbol.iterator] === "function") ? (ρσ_Iter4 instanceof Map ? ρσ_Iter4.keys() : ρσ_Iter4) : Object.keys(ρσ_Iter4));
+        for (var ρσ_Index4 of ρσ_Iter4) {
+            i = ρσ_Index4;
             "121";
             (await rate(rot_rate));
             "122";
-            py_interpolate_kwargs.call(pointer, pointer.rotate, [py_desugar_kwargs({angle: pi["/"](180)["*"](2), axis: vec(0, 0, 1)})]);
+            ρσ_interpolate_kwargs.call(pointer, pointer.rotate, [ρσ_desugar_kwargs({angle: pi["/"](180)["*"](2), axis: vec(0, 0, 1)})]);
             "123";
             (await UpdatePos(pointer.axis));
         }
@@ -351,16 +351,16 @@ py_unpack = py_unpack_asarray(3, py_unpack);
 
     "125";
     async function S_gate(bS) {
-        var py_ls, i;
+        var ρσ_ls, i;
         "126";
-        var py_Iter5 = ang;
-        py_Iter5 = ((typeof py_Iter5[Symbol.iterator] === "function") ? (py_Iter5 instanceof Map ? py_Iter5.keys() : py_Iter5) : Object.keys(py_Iter5));
-        for (var py_Index5 of py_Iter5) {
-            i = py_Index5;
+        var ρσ_Iter5 = ang;
+        ρσ_Iter5 = ((typeof ρσ_Iter5[Symbol.iterator] === "function") ? (ρσ_Iter5 instanceof Map ? ρσ_Iter5.keys() : ρσ_Iter5) : Object.keys(ρσ_Iter5));
+        for (var ρσ_Index5 of ρσ_Iter5) {
+            i = ρσ_Index5;
             "127";
             (await rate(rot_rate["*"](1.5)));
             "128";
-            py_interpolate_kwargs.call(pointer, pointer.rotate, [py_desugar_kwargs({angle: pi["/"](180), axis: vec(0, 0, 1)})]);
+            ρσ_interpolate_kwargs.call(pointer, pointer.rotate, [ρσ_desugar_kwargs({angle: pi["/"](180), axis: vec(0, 0, 1)})]);
             "129";
             (await UpdatePos(pointer.axis));
         }
@@ -372,16 +372,16 @@ py_unpack = py_unpack_asarray(3, py_unpack);
 
     "131";
     async function T_gate(bT) {
-        var py_ls, i;
+        var ρσ_ls, i;
         "132";
-        var py_Iter6 = ang;
-        py_Iter6 = ((typeof py_Iter6[Symbol.iterator] === "function") ? (py_Iter6 instanceof Map ? py_Iter6.keys() : py_Iter6) : Object.keys(py_Iter6));
-        for (var py_Index6 of py_Iter6) {
-            i = py_Index6;
+        var ρσ_Iter6 = ang;
+        ρσ_Iter6 = ((typeof ρσ_Iter6[Symbol.iterator] === "function") ? (ρσ_Iter6 instanceof Map ? ρσ_Iter6.keys() : ρσ_Iter6) : Object.keys(ρσ_Iter6));
+        for (var ρσ_Index6 of ρσ_Iter6) {
+            i = ρσ_Index6;
             "133";
             (await rate(rot_rate["*"](2)));
             "134";
-            py_interpolate_kwargs.call(pointer, pointer.rotate, [py_desugar_kwargs({angle: pi["/"](180)["/"](2), axis: vec(0, 0, 1)})]);
+            ρσ_interpolate_kwargs.call(pointer, pointer.rotate, [ρσ_desugar_kwargs({angle: pi["/"](180)["/"](2), axis: vec(0, 0, 1)})]);
             "135";
             (await UpdatePos(pointer.axis));
         }
@@ -393,18 +393,18 @@ py_unpack = py_unpack_asarray(3, py_unpack);
 
     "137";
     async function phase_gate(bP) {
-        var py_ls, inputphase, i;
+        var ρσ_ls, inputphase, i;
         "138";
-        var py_Iter7 = ang;
-        py_Iter7 = ((typeof py_Iter7[Symbol.iterator] === "function") ? (py_Iter7 instanceof Map ? py_Iter7.keys() : py_Iter7) : Object.keys(py_Iter7));
-        for (var py_Index7 of py_Iter7) {
-            i = py_Index7;
+        var ρσ_Iter7 = ang;
+        ρσ_Iter7 = ((typeof ρσ_Iter7[Symbol.iterator] === "function") ? (ρσ_Iter7 instanceof Map ? ρσ_Iter7.keys() : ρσ_Iter7) : Object.keys(ρσ_Iter7));
+        for (var ρσ_Index7 of ρσ_Iter7) {
+            i = ρσ_Index7;
             "139";
             inputphase = wP.number;
             "140";
             (await rate(rot_rate["*"](180)["/"](inputphase)));
             "141";
-            py_interpolate_kwargs.call(pointer, pointer.rotate, [py_desugar_kwargs({angle: pi["/"](180)["/"](90)["*"](inputphase), axis: vec(0, 0, 1)})]);
+            ρσ_interpolate_kwargs.call(pointer, pointer.rotate, [ρσ_desugar_kwargs({angle: pi["/"](180)["/"](90)["*"](inputphase), axis: vec(0, 0, 1)})]);
             "142";
             (await UpdatePos(pointer.axis));
         }
@@ -426,24 +426,24 @@ py_unpack = py_unpack_asarray(3, py_unpack);
     });
 
     "150";
-    init = py_interpolate_kwargs.call(this, button, [py_desugar_kwargs({text: "qubit init.", pos: scene.title_anchor, bind: init})]);
+    init = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "qubit init.", pos: scene.title_anchor, bind: init})]);
     "151";
-    bH = py_interpolate_kwargs.call(this, button, [py_desugar_kwargs({text: "H gate", pos: scene.title_anchor, bind: H_gate})]);
+    bH = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "H gate", pos: scene.title_anchor, bind: H_gate})]);
     "152";
-    bX = py_interpolate_kwargs.call(this, button, [py_desugar_kwargs({text: "X gate", pos: scene.title_anchor, bind: X_gate})]);
+    bX = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "X gate", pos: scene.title_anchor, bind: X_gate})]);
     "153";
-    bY = py_interpolate_kwargs.call(this, button, [py_desugar_kwargs({text: "Y gate", pos: scene.title_anchor, bind: Y_gate})]);
+    bY = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "Y gate", pos: scene.title_anchor, bind: Y_gate})]);
     "154";
-    bZ = py_interpolate_kwargs.call(this, button, [py_desugar_kwargs({text: "Z gate", pos: scene.title_anchor, bind: Z_gate})]);
+    bZ = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "Z gate", pos: scene.title_anchor, bind: Z_gate})]);
     "155";
-    bS = py_interpolate_kwargs.call(this, button, [py_desugar_kwargs({text: "S gate", pos: scene.title_anchor, bind: S_gate})]);
+    bS = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "S gate", pos: scene.title_anchor, bind: S_gate})]);
     "156";
-    bT = py_interpolate_kwargs.call(this, button, [py_desugar_kwargs({text: "T gate", pos: scene.title_anchor, bind: T_gate})]);
+    bT = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "T gate", pos: scene.title_anchor, bind: T_gate})]);
     (await sleep(.1));
     "157";
-    wP = py_interpolate_kwargs.call(this, winput, [py_desugar_kwargs({pos: scene.title_anchor, bind: null, width: 30})]);
+    wP = ρσ_interpolate_kwargs.call(this, winput, [ρσ_desugar_kwargs({pos: scene.title_anchor, bind: null, width: 30})]);
     "158";
-    bP = py_interpolate_kwargs.call(this, button, [py_desugar_kwargs({text: "phase gate", pos: scene.title_anchor, bind: phase_gate})]);
+    bP = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "phase gate", pos: scene.title_anchor, bind: phase_gate})]);
 };
 if (!__main__.__module__) Object.defineProperties(__main__, {
     __module__ : {value: null}
