@@ -5,8 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Web VPython on GitHub Pages</title>
 
-  <link rel="stylesheet" href="./css/jquery-ui.custom.css">
-  <link rel="stylesheet" href="./css/ide.css">
+  <script src="./vendor/glowscript/glow.3.2.min.js"
+          onload="console.log('Glow loaded from local file')"
+          onerror="console.error('Glow FAILED to load from local file')"></script>
+
+  <script src="./vendor/glowscript/RSrun.3.2.min.js"
+          onload="console.log('RSrun loaded from local file')"
+          onerror="console.error('RSrun FAILED to load from local file')"></script>
 
   <script src="./vendor/jquery/jquery-2.1.0.min.js"
           onload="console.log('jQuery loaded')"
@@ -34,8 +39,8 @@
   </script>
   
   <script>
-    alert('PING 52');               // 一定會跳窗
-    console.log('HELLO 52');        // 一定會出現在 Console
+    alert('PING 53');               // 一定會跳窗
+    console.log('HELLO 53');        // 一定會出現在 Console
   </script>
 
 
