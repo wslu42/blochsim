@@ -21,9 +21,8 @@
   <!-- GlowScript 容器 -->
   <div id="glowscript" class="glowscript"></div>
 
-  <!-- 關鍵：立即指定 jQuery 物件 -->
   <script>
-    window.__context = { glowscript_container: $("#glowscript") };
+  window.__context = { glowscript_container: $("#glowscript").removeAttr("id") };
   </script>
 
   <!-- GlowScript 原始程式碼 -->
