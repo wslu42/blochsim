@@ -2,124 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>GlowScript VPython Minimal Test</title>
+  <title>GlowScript (JS API) Animation</title>
 
-  <!-- GS 需要的 CSS（版本固定） -->
+  <!-- CSS -->
   <link rel="stylesheet" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css">
   <link rel="stylesheet" href="https://www.glowscript.org/css/ide.css">
 
-  <!-- jQuery 2.1.4 + jQuery UI 1.12.1：這組對 GlowScript 3.2 最穩 -->
+  <!-- jQuery + jQuery UI（與 GlowScript 3.2 相容） -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
-  <!-- GlowScript runtime（先 glow 再 RSrun） -->
+  <!-- 只需要 glow（JS API 寫法不需 RSrun） -->
   <script src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
-  <script src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
 
-  <style>
-    /* 給容器一個可見邊框，方便觀察 */
-    #gsbox { border: 8px dashed #999; padding: 8px; }
-  </style>
-
-
-</head>
-<body>
-
-  <!-- 唯一容器：class 必須是 glowscript；id 隨意（這裡用 gsbox） -->
-  <div id="gsbox" class="glowscript"></div>
-
-  <!-- 關鍵：把容器交給 GlowScript；放在 GS 腳本之前，且在 DOM ready 時做 -->
-  <script>
-    $(function () {
-      window.__context = { glowscript_container: $("#gsbox") };
-    });
-  </script>
-
-  <script>
-  $(function(){
-    console.log("DBG:", typeof window.RSrun, $(".glowscript").length);
-  });
-  </script>
-
-
-  <!-- 你的 GlowScript 程式（首行必為這句，前面不能有空白/註解） -->
-  <script type="text/x-glowscript">GlowScript 3.2 VPython
-scene = canvas(title="Test Scene", width=640, height=360, background=vec(1,1,1))
-
-# 畫布內看得見的東西
-label(pos=vec(0,0,0), text="Hello GlowScript!", height=20, color=color.black, box=False)
-sphere(pos=vec(0,0,0), radius=0.4, color=color.cyan, opacity=0.8)
-
-# 畫布下方的三種輸出（不在瀏覽器 Console）
-print("✅ GlowScript print works!")
-wtext(text="<b>[wtext]</b> hello from wtext<br>")
-scene.append_to_caption("\\n[dbg] appended caption line\\n")
-</script>
-
-</body>
-</html>
-
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>GlowScript VPython Minimal Test</title>
-
-  <!-- GlowScript CSS -->
-  <link rel="stylesheet" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css">
-  <link rel="stylesheet" href="https://www.glowscript.org/css/ide.css">
-
-  <!-- jQuery 2.1.4 + jQuery UI 1.12.1（與 GS 3.2 最穩） -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
-  <!-- GlowScript runtime（先 glow 再 RSrun） -->
-  <script src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
-  <script src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
-
-
-  <script>alert('PING 5.8');</script>
+  <script>alert('PING 6.0');</script>
 
   <style>
     #gsbox { border: 8px dashed #999; padding: 8px; }
   </style>
 </head>
 <body>
-
-  <!-- 容器：class 必須是 glowscript -->
   <div id="gsbox" class="glowscript"></div>
 
-  <!-- 關鍵：設定容器並手動啟動 RS_run() -->
   <script>
     $(function () {
-      // 把容器交給 GlowScript
+      // 把畫布綁到容器
       window.__context = { glowscript_container: $("#gsbox") };
 
-      // 強制啟動執行器（符號名稱是 RS_run，不是 RSrun）
-      if (typeof window.RS_run === "function") {
-        RS_run();
-      } else {
-        console.log("DBG: RS_run not found; keys=", Object.keys(window));
+      // 畫布與物件
+      var scene = canvas({ title: "JS API Animation", width: 640, height: 360, background: color.white });
+      var ring0 = ring({ pos: vec(0,0,0), axis: vec(0,0,1), radius: 2.0, thickness: 0.02, color: vec(0.8,0.8,0.8) });
+      var ball  = sphere({ pos: vec(2,0,0), radius: 0.3, color: color.cyan, opacity: 0.9 });
+
+      print("✅ JS API animation started");
+      scene.append_to_caption("\\n[tip] click canvas to pause/resume\\n");
+
+      // 簡單動畫：讓球沿半徑=2 的圓運動
+      var t = 0, running = true;
+      function loop() {
+        if (running) {
+          t += 0.02;  // 調整速度
+          ball.pos = vec( 2*Math.cos(t), 2*Math.sin(t), 0 );
+        }
+        requestAnimationFrame(loop);
       }
+      loop();
+
+      // 點擊畫布可暫停/繼續
+      scene.bind("click", function () { running = !running; });
     });
   </script>
-
-  <!-- GlowScript 程式（首行必為此句，前面不要有空白/註解） -->
-  <script type="text/x-glowscript">GlowScript 3.2 VPython
-scene = canvas(title="Test Scene", width=640, height=360, background=vec(1,1,1))
-label(pos=vec(0,0,0), text="Hello GlowScript!", height=20, color=color.black, box=False)
-sphere(pos=vec(0,0,0), radius=0.4, color=color.cyan, opacity=0.8)
-
-print("✅ GlowScript print works!")
-wtext(text="<b>[wtext]</b> hello from wtext<br>")
-scene.append_to_caption("\\n[dbg] appended caption line\\n")
-</script>
-
 </body>
 </html>
-
