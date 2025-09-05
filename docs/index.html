@@ -17,9 +17,9 @@
 
   <script>
     (function () {
-      var $el = $("#glowscript");   // ← jQuery 物件
-      $el.removeAttr("id");
-      window.__context = { glowscript_container: $el };
+      var el = document.getElementById('glowscript');
+      el.removeAttribute('id');
+      window.__context = { glowscript_container: el };
     })();
   </script>
   
