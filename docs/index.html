@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Web VPython on GitHub Pages</title>
 
-  <!-- GlowScript / VPython 3.2 必要檔 -->
+  <!-- 必要的樣式與腳本（順序很重要） -->
+  <link rel="stylesheet" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css">
   <link rel="stylesheet" href="https://www.glowscript.org/css/ide.css">
   <script src="https://www.glowscript.org/lib/jquery/2.1/jquery.min.js"></script>
-  <!-- 用公共 CDN 的 jQuery UI，避免 CORB -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
   <script src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
@@ -16,12 +16,12 @@
 <body>
   <div id="glowscript" class="glowscript"></div>
 
-  <!-- ★ 不用 jQuery，純 DOM 指定容器（GlowScript 需要這一步） -->
+  <!-- ★ 用 jQuery 物件指定容器，並先移除 id -->
   <script>
     (function () {
-      var el = document.getElementById('glowscript');
-      el.removeAttribute('id');                // GlowScript 會把 id 當內部使用，需移除
-      window.__context = { glowscript_container: el };
+      var $el = $("#glowscript");
+      $el.removeAttr("id");
+      window.__context = { glowscript_container: $el };
     })();
   </script>
 
