@@ -5,25 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Web VPython on GitHub Pages</title>
 
+  <!-- GlowScript 需要的 CSS -->
   <link rel="stylesheet" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css">
   <link rel="stylesheet" href="https://www.glowscript.org/css/ide.css">
+
+  <!-- jQuery + jQueryUI -->
   <script src="https://www.glowscript.org/lib/jquery/2.1/jquery.min.js"></script>
   <script src="https://www.glowscript.org/lib/jquery/2.1/jquery-ui.min.js"></script>
+
+  <!-- GlowScript runtime -->
   <script src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
   <script src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
 </head>
 <body>
+  <!-- GlowScript 容器 -->
   <div id="glowscript" class="glowscript"></div>
 
+  <!-- 關鍵：立即指定 jQuery 物件 -->
   <script>
-    (function () {
-      var el = document.getElementById('glowscript');
-      el.removeAttribute('id');
-      window.__context = { glowscript_container: el };
-    })();
+    window.__context = { glowscript_container: $("#glowscript") };
   </script>
-  
 
+  <!-- GlowScript 原始程式碼 -->
   <script type="text/x-glowscript">
 GlowScript 3.2 VPython
 scene = canvas(title='Hello Web VPython', width=600, height=400, background=vec(1,1,1))
