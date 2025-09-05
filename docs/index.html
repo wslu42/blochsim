@@ -21,7 +21,7 @@
     #gsbox { border: 8px dashed #999; padding: 8px; }
   </style>
 
-  <script>alert('PING 5.6');</script>
+  <script>alert('PING 5.8');</script>
 
 </head>
 <body>
@@ -35,6 +35,13 @@
       window.__context = { glowscript_container: $("#gsbox") };
     });
   </script>
+
+  <script>
+  $(function(){
+    console.log("DBG:", typeof window.RSrun, $(".glowscript").length);
+  });
+  </script>
+
 
   <!-- 你的 GlowScript 程式（首行必為這句，前面不能有空白/註解） -->
   <script type="text/x-glowscript">GlowScript 3.2 VPython
