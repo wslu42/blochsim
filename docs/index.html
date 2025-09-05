@@ -17,7 +17,7 @@
   <script src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
 
   <script>
-    alert('PING 4.8');               // 一定會跳窗
+    alert('PING 4.9');               // 一定會跳窗
   </script>
 
   <style>#glowscript { border: 10px dashed #999; min-height: 200px; }</style>
@@ -27,6 +27,8 @@
   <div id="glowscript" class="glowscript"></div>
 
   <script type="text/x-glowscript">GlowScript 3.2 VPython
+scene = canvas(title="Test Scene", width=600, height=300, background=color.white)
+
 print("GlowScript is running on GitHub Pages!")
 label(pos=vec(0,0,0), text="Hello GlowScript!", height=20, color=color.black, box=False)
 </script>
