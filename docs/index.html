@@ -3,244 +3,181 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bloch Sphere — Vanilla JS（非模組、內建滑鼠控制）</title>
-  <script src="https://unpkg.com/three@0.148.0/build/three.min.js"></script>
-  <script>
-    window.MathJax = { tex: { inlineMath: [["$","$"],["\\(","\\)"]] } };
-  </script>
-  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <style>
-    html, body { margin:0; height:100%; font-family: ui-sans-serif, system-ui; }
-    #app { display:flex; gap:12px; height:100%; }
-    #left { width:420px; min-width:320px; box-sizing:border-box; padding:12px 14px; border-right:1px solid #e5e7eb; overflow:auto; }
-    #title { font-weight:700; margin-bottom:6px; }
-    #owner { font-size:12px; color:#6b7280; line-height:1.4; }
-    #controls { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 12px; }
-    button, input[type="number"] { padding:8px 10px; border:1px solid #d1d5db; border-radius:10px; background:#fff; cursor:pointer; font-weight:600; }
-    #canvasWrap { position:relative; flex:0 0 520px; width:520px; height:520px; border:1px solid #e5e7eb; background:#f7fafc; }
-    #caption { white-space:pre-wrap; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:13px; }
-  </style>
+  <title>Web VPython on GitHub Pages</title>
+
+  <!-- 必要：GlowScript / VPython 3.2 运行庫 -->
+  <link rel="stylesheet" href="https://www.glowscript.org/css/ide.css">
+  <script src="https://www.glowscript.org/lib/jquery/2.1/jquery.min.js"></script>
+  <script src="https://www.glowscript.org/lib/jquery/2.1/jquery-ui.min.js"></script>
+  <script src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
+  <script src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
 </head>
 <body>
-<div id="app">
-  <div id="canvasWrap"></div>
+  <!-- 容器：id 建議就叫 glowscript，class 必須含 glowscript -->
+  <div id="glowscript" class="glowscript"></div>
 
-  <div id="left">
-    <div id="title">Bloch Sphere</div>
-    <div id="owner">original code owner: <b>Hong‑Yi Yang</b> (NCHU, Taiwan)<br>adopted & modified for vanilla JS by Wen‑Sen</div>
-    <div>Manual — 左鍵拖曳: 旋轉、滾輪: 縮放、右鍵拖曳: 平移</div>
+  <!-- 這裡直接寫 VPython（GlowScript）程式 -->
+  <script type="text/x-glowscript">
+GlowScript 3.2 VPython
+Web VPython 3.2
+# Created By : Hong-Yi, Yang
+# Master Student in Professor Watson Kuo's lab (郭華丞老師), NCHU, Taiwan
+# Source code webpage: https://www.glowscript.org/#/user/Derek625/folder/MyPrograms/program/BlochSphere/edit
 
-    <div id="equations">
-      $|\\Psi\\rangle = \\alpha |0\\rangle + \\beta |1\\rangle$ ; $\\alpha=\\cos\\tfrac{\\theta}{2}$ ; $\\beta=e^{i\\phi}\\sin\\tfrac{\\theta}{2}$
-    </div>
+scene = canvas(title='original code owner: <b>Hong-Yi Yang</b>. Master Student at NCHU, Taiwan\n', width=400, height=400, x=0, y=0, center=vec(0, 0, 0),background=vec(1,1,1), align='left')
+scene.append_to_title('adopted and modified by Wen-Sen Lu, IBM Quantum\n\n')
 
-    <div id="controls">
-      <button id="initBtn">qubit init.</button>
-      <button id="HBtn">H gate</button>
-      <button id="XBtn">X gate</button>
-      <button id="YBtn">Y gate</button>
-      <button id="ZBtn">Z gate</button>
-    </div>
+scene.append_to_title('Manual -- Drag with right click: rotate; Scroll: zoom; Left click + Shift: pan\n')
+scene.append_to_title('使用說明 -- 滑鼠右鍵: 旋轉視角; 滾輪: 縮放畫面; 左鍵+Shift: 平移\n\n')
+scene.append_to_title('\\(| \\Psi \\rangle =\\alpha \\left| 0\\rangle +\\beta \\right| 1\\rangle\\)'+'\\(\\quad\\quad\\quad\\)')
+scene.append_to_title('\\(\\alpha =\\cos \\dfrac{\\theta }{2}\\)'+'  ;  '+'\\(\\beta =e^{i\\phi }\\sin \\dfrac{\\theta }{2}\\)'+'\n\n')
 
-    <div id="caption"></div>
-  </div>
-</div>
+scene.camera.rotate(angle=pi/2, axis=vec(1,0,0))
+scene.camera.rotate(angle=pi*3/4, axis=vec(0,0,1))
+scene.camera.rotate(angle=pi/15, axis=vec(1,-1,0))
+scene.center=vector(0,0,0.25)
 
-<script>
-  const scale = 1.25;
-  const wrap = document.getElementById('canvasWrap');
-  const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xf7fafc);
+scene.caption = '\n'
+scene.append_to_caption("\\(\\theta = 0\\)"+"\\(^{\\circ }\\)"+"  ;  \\(\\phi = 0\\)"+"\\(^{\\circ }\\)"+'\n\n')
+scene.append_to_caption('\\(\\alpha = 1\\)  ;  \\(\\beta = 0 + 0i\\) \n\n')
+scene.append_to_caption('Probability of \\(| 0\\rangle\\): 100%\n'+'Probability of \\(| 1\\rangle\\): 0%\n') 
+scene.append_to_caption('\n* the \\(\\phi\\) value at \\(| 1\\rangle\\) \n here is just an FYI \n and not always correct!')
+scene.append_to_caption('\n* 於 \\(| 1\\rangle\\) 時之 \\(\\phi\\) 值僅供參考！\n\n')
 
-  const camera = new THREE.PerspectiveCamera(35, (wrap.clientWidth||520)/(wrap.clientHeight||520), 0.1, 100);
-  const target = new THREE.Vector3(0,0,0);
-  let radius = 3.8*1.5, theta = Math.PI/4, phi = Math.PI/3;
-  function updateCamera(){
-    const x = target.x + radius * Math.sin(phi) * Math.sin(theta);
-    const y = target.y + radius * Math.cos(phi);
-    const z = target.z + radius * Math.sin(phi) * Math.cos(theta);
-    camera.position.set(x,y,z);
-    camera.lookAt(target);
-  }
-  updateCamera();
+MathJax.Hub.Queue(["Typeset",MathJax.Hub])
 
-  const renderer = new THREE.WebGLRenderer({ antialias:true });
-  const w0 = wrap.clientWidth||520, h0 = wrap.clientHeight||520;
-  renderer.setPixelRatio(window.devicePixelRatio||1);
-  renderer.setSize(w0,h0);
-  wrap.appendChild(renderer.domElement);
+scale = 1.25
+rot_rate = 120
+xaxis = arrow(pos=vec(-scale,0,0), axis=vec(2*scale,0,0), color=vec(0.2,0.2,0.2), opacity=0.2, shaftwidth=0.8*scale/40, headwidth=2.4*scale/40, headlength=3.2*scale/40 )
+yaxis = arrow(pos=vec(0,-scale,0), axis=vec(0,2*scale,0), color=vec(0.2,0.2,0.2), opacity=0.2, shaftwidth=0.8*scale/40, headwidth=2.4*scale/40, headlength=3.2*scale/40 )
+zaxis = arrow(pos=vec(0,0,-scale), axis=vec(0,0,2*scale), color=vec(0.2,0.2,0.2), opacity=0.2, shaftwidth=0.8*scale/40, headwidth=2.4*scale/40, headlength=3.2*scale/40 )
 
-  // 光源設定
-  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 0.4));
-  const dirLight1 = new THREE.DirectionalLight(0xffffff, 0.6);
-  dirLight1.position.set(2,2,3);
-  scene.add(dirLight1);
-  const dirLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
-  dirLight2.position.set(5,5,5);
-  scene.add(dirLight2);
+label(text='<i>x</i>', color=vec(0.2,0.2,0.2), pos=vec(scale*1.1,0,0), box=False, opacity=0)
+label(text='<i>y</i>', color=vec(0.2,0.2,0.2), pos=vec(0,scale*1.1,0), box=False, opacity=0)
+label(text='<i>z</i>', color=vec(0.2,0.2,0.2), pos=vec(0,0,scale*1.1), box=False, opacity=0)
+label(text='|+>', color=vec(0.2,0.2,0.2), pos=vec(scale*1.25,0,0), box=False, opacity=0)
+label(text='|- >', color=vec(0.2,0.2,0.2), pos=vec(-scale*1.25,0,0), box=False, opacity=0)
+label(text='|+<i>i </i>>', color=vec(0.2,0.2,0.2), pos=vec(0,scale*1.25,0), box=False, opacity=0)
+label(text='|-<i>i </i>>', color=vec(0.2,0.2,0.2), pos=vec(0,-scale*1.25,0), box=False, opacity=0)
+label(text='|0>', color=vec(0.2,0.2,0.2), pos=vec(0,0,scale*1.25), box=False, opacity=0)
+label(text='|1>', color=vec(0.2,0.2,0.2), pos=vec(0,0,-scale*1.25), box=False, opacity=0)
 
-  // 半透明 Bloch 球 (Phong 材質)
-  const ball = new THREE.Mesh(
-    new THREE.SphereGeometry(0.7*scale, 64, 32),
-    new THREE.MeshPhongMaterial({ color:0xffffff, transparent:true, opacity:0.60, shininess:60, specular:0xdddddd })
-  );
-  scene.add(ball);
-  // 以 group 包住經緯線，方便『只旋轉這一層』並加入可視化導引
-const gridGroup = new THREE.Group();
-scene.add(gridGroup);
+ball = sphere(pos=vec(0,0,0), radius=scale*0.9, opacity=0.12)
 
-const sphereGrid = new THREE.LineSegments(
-  new THREE.WireframeGeometry(new THREE.SphereGeometry(0.7*scale, 24, 16)),
-  new THREE.LineBasicMaterial({ color:0x9ca3af, transparent:true, opacity:0.25 })
-);
-gridGroup.add(sphereGrid);
+pointer = arrow(pos=vec(0,0,0), axis=vec(0,0,1), color=vector(0.8,0.4,1.5))
 
-// 加一條僅屬於經緯線群組的『極軸導引線』(初始沿 +z，旋轉後可清楚看到指向的變化)
-const guideGeom = new THREE.BufferGeometry().setFromPoints([
-  new THREE.Vector3(0,0,0),
-  new THREE.Vector3(0,0,0.9*scale)
-]);
-const guideMat = new THREE.LineBasicMaterial({ color:0xf59e0b, transparent:true, opacity:0.6 });
-const gridAxisGuide = new THREE.Line(guideGeom, guideMat);
-gridGroup.add(gridAxisGuide);
+ang = range(90)
 
-// 只旋轉『經緯線群組』：讓其北極改到 +x （繞 y 軸 -90°）
-const gridAxis = new THREE.Vector3(1,0,0).normalize();
-const gridAngle = -Math.PI/2;
-gridGroup.rotateOnAxis(gridAxis, gridAngle);
+def fround(vect):
+    if abs(vect.x) < 10**-5 or 1-abs(vect.x) < 10**-5:
+        x = round(vect.x)
+    else:
+        x = vect.x
+    if abs(vect.y) < 10**-5 or 1-abs(vect.y) < 10**-5:
+        y = round(vect.y)
+    else:
+        y = vect.y
+    if abs(vect.z) < 10**-5 or 1-abs(vect.z) < 10**-5:
+        z = round(vect.z)
+    else:
+        z = vect.z
+    return x, y, z
 
-  // 細緻軸線樣式
-  const axisMat = new THREE.LineBasicMaterial({ color:0x333333, transparent:false, opacity:0.5 });
-  function axis(from, to){
-    const g = new THREE.BufferGeometry().setFromPoints([from,to]);
-    scene.add(new THREE.Line(g, axisMat));
-  }
-  axis(new THREE.Vector3(-scale,0,0), new THREE.Vector3(scale,0,0));
-  axis(new THREE.Vector3(0,-scale,0), new THREE.Vector3(0,scale,0));
-  axis(new THREE.Vector3(0,0,-scale), new THREE.Vector3(0,0,scale));
-  const ah = 0.10*scale, aw = 0.06*scale;
-  const xArrow = new THREE.ArrowHelper(new THREE.Vector3(1,0,0), new THREE.Vector3(0,0,0), scale, 0x6b7280, ah, aw);
-  const yArrow = new THREE.ArrowHelper(new THREE.Vector3(0,1,0), new THREE.Vector3(0,0,0), scale, 0x6b7280, ah, aw);
-  const zArrow = new THREE.ArrowHelper(new THREE.Vector3(0,0,1), new THREE.Vector3(0,0,0), scale, 0x6b7280, ah, aw);
-  scene.add(xArrow, yArrow, zArrow);
+def UpdatePos(vect):
+    #state = fround(vect)
+    x, y, z = fround(vect)
+    
+    theta = abs(atan((x**2+y**2)**0.5/z))
+    if z < 0:
+        theta = pi-theta
+        
+    phi = atan2(y,x)
+    if y == 0 & x == -1:
+        phi = pi
+    else if y < 0:
+        phi = 2*pi+phi
+    if z == 1:
+        phi = 0
+    #else if z == -1:
+     #   phi = 0
+     
+    alpha = cos(theta/2)
+    beta_re = cos(phi)*sin(theta/2)
+    beta_im =sin(phi)*sin(theta/2)
+    al = f"{alpha:.3f}"
+    bere = f"{beta_re:.3f}"
+    beim = f"{beta_im:.3f}"
+    p0 = f"{alpha**2*100:.2f}"
+    p1 = f"{(beta_re**2+beta_im**2)*100:.2f}"
 
-  // === Label Sprites on the sphere ===
-  const labelGroup = new THREE.Group();
-  scene.add(labelGroup);
+    scene.caption = '\n'
+    scene.append_to_caption("\\(\\theta =\\)"+round(degrees(theta))+"\\(^{\\circ }\\)"+"  ;   \\(\\phi =\\)"+round(degrees(phi))+"\\(^{\\circ }\\)"+'\n\n')
+    scene.append_to_caption("\\(\\alpha =\\)"+al+"  ;  \\(\\beta =\\)"+bere+'+'+beim+" \\(i\\)"+'\n\n')
+    scene.append_to_caption("Probability of \\(| 0\\rangle\\):"+p0+'%\n'+"Probability of \\(| 1\\rangle\\):"+p1+'%\n')
+    scene.append_to_caption('\n* the \\(\\phi\\) value at \\(| 1\\rangle\\) \n here is just an FYI \n and not always correct!')
+    scene.append_to_caption('\n* 於 \\(| 1\\rangle\\) 時之 \\(\\phi\\) 值僅供參考！\n\n')
+    
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub])
 
-  function makeTextSprite(text, options={}){
-    const fontSize = options.fontSize || 64; // canvas pixels
-    const padding = options.padding || 16;
-    const color = options.color || '#374151';
+def H_gate(bH):
+    for i in ang:
+        rate(rot_rate)
+        pointer.rotate(angle=pi/180*2, axis=vec(1,0,1))
+        UpdatePos(pointer.axis)
 
-    const cvs = document.createElement('canvas');
-    const ctx = cvs.getContext('2d');
-    ctx.font = `bold ${fontSize}px Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto`;
-    const metrics = ctx.measureText(text);
-    const textW = Math.ceil(metrics.width);
-    const textH = Math.ceil(fontSize*1.2);
-    cvs.width  = textW + padding*2;
-    cvs.height = textH + padding*2;
+def X_gate(bX):
+    for i in ang:
+        rate(rot_rate)
+        pointer.rotate(angle=pi/180*2, axis=vec(1,0,0))
+        UpdatePos(pointer.axis)
 
-    // re-assign font after resizing canvas
-    ctx.font = `bold ${fontSize}px Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto`;
-    ctx.fillStyle = color;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(text, cvs.width/2, cvs.height/2 + 2);
+def Y_gate(bY):
+    for i in ang:
+        rate(rot_rate)
+        pointer.rotate(angle=pi/180*2, axis=vec(0,1,0))
+        UpdatePos(pointer.axis)
 
-    const tex = new THREE.Texture(cvs);
-    tex.needsUpdate = true;
-    tex.minFilter = THREE.LinearFilter;
-    tex.magFilter = THREE.LinearFilter;
+def Z_gate(bZ):
+    for i in ang:
+        rate(rot_rate)
+        pointer.rotate(angle=pi/180*2, axis=vec(0,0,1))
+        UpdatePos(pointer.axis)
 
-    const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false });
-    const sprite = new THREE.Sprite(mat);
-    // scale sprite in world units keeping aspect ratio
-    const size = (options.worldSize || 0.34) * scale; // world units height
-    const aspect = cvs.width / cvs.height;
-    sprite.scale.set(size*aspect, size, 1);
-    return sprite;
-  }
+def S_gate(bS):
+    for i in ang:
+        rate(rot_rate*1.5)
+        pointer.rotate(angle=pi/180, axis=vec(0,0,1))
+        UpdatePos(pointer.axis)
 
-  function addLabel(text, pos){
-    const s = makeTextSprite(text);
-    s.position.copy(pos);
-    labelGroup.add(s);
-  }
+def T_gate(bT):
+    for i in ang:
+        rate(rot_rate*2)
+        pointer.rotate(angle=pi/180/2, axis=vec(0,0,1))
+        UpdatePos(pointer.axis)
 
-  const lr = 1.25*scale; // label radius
-  addLabel('|+⟩',   new THREE.Vector3( lr, 0, 0));
-  addLabel('|−⟩',   new THREE.Vector3(-lr, 0, 0));
-  addLabel('|+i⟩',  new THREE.Vector3( 0, lr, 0));
-  addLabel('|−i⟩',  new THREE.Vector3( 0,-lr, 0));
-  addLabel('|0⟩',   new THREE.Vector3( 0, 0, lr));
-  addLabel('|1⟩',   new THREE.Vector3( 0, 0,-lr));
+def phase_gate(bP):
+    for i in ang:
+        inputphase = wP.number
+        rate(rot_rate*180/inputphase)
+        pointer.rotate(angle=pi/180/90*inputphase, axis=vec(0,0,1))
+        UpdatePos(pointer.axis)
+
+def init():
+    pointer.axis=vec(0,0,1)
+    UpdatePos(pointer.axis)
 
 
 
+init = button(text='qubit init.', pos=scene.title_anchor, bind=init)
+bH = button(text='H gate', pos=scene.title_anchor, bind=H_gate)
+bX = button(text='X gate', pos=scene.title_anchor, bind=X_gate)
+bY = button(text='Y gate', pos=scene.title_anchor, bind=Y_gate)
+bZ = button(text='Z gate', pos=scene.title_anchor, bind=Z_gate)
+bS = button(text='S gate', pos=scene.title_anchor, bind=S_gate)
+bT = button(text='T gate', pos=scene.title_anchor, bind=T_gate)
+wP = winput(pos=scene.title_anchor, bind=None, width=30)
+bP = button(text='phase gate', pos=scene.title_anchor, bind=phase_gate)
 
-  // 使用 Vector3 追蹤箭頭方向
-  let pointerDir = new THREE.Vector3(0,0,1);
-  const pointer = new THREE.ArrowHelper(pointerDir.clone().normalize(), new THREE.Vector3(0,0,0), 0.90*scale, 0x9333ea, 0.10*scale, 0.06*scale);
-  scene.add(pointer);
-
-  function setPointerDir(v){ pointerDir.copy(v.clone().normalize()); pointer.setDirection(pointerDir); }
-  function initQ(){ setPointerDir(new THREE.Vector3(0,0,1)); }
-  document.getElementById('initBtn').onclick = initQ; initQ();
-
-  // 初始時旋轉整個場景，讓 z 軸沿 (0,0,1) 指向畫面「上方」
-  const rotAxis = new THREE.Vector3(1,1,1).normalize();
-  const rotAngle = (-2*Math.PI)/3; // 120 度
-  scene.rotateOnAxis(rotAxis, rotAngle);
-
-  let dragging = false; let panMode = false; let lastX=0, lastY=0;
-  const ROT_SPEED = 0.005, PAN_SPEED = 0.002, ZOOM_SPEED = 0.001;
-
-  renderer.domElement.addEventListener('contextmenu', e=>e.preventDefault());
-  renderer.domElement.addEventListener('mousedown', e=>{
-    dragging = true; lastX=e.clientX; lastY=e.clientY; panMode = (e.button===2);
-  });
-  window.addEventListener('mouseup', ()=>dragging=false);
-  window.addEventListener('mousemove', e=>{
-    if(!dragging) return;
-    const dx = e.clientX - lastX; const dy = e.clientY - lastY; lastX=e.clientX; lastY=e.clientY;
-    if(!panMode){
-      theta -= dx * ROT_SPEED;
-      phi   -= dy * ROT_SPEED;
-      const EPS=1e-3; phi = Math.max(EPS, Math.min(Math.PI-EPS, phi));
-      updateCamera();
-    }else{
-      const dir = new THREE.Vector3(); camera.getWorldDirection(dir).normalize();
-      const right = new THREE.Vector3().crossVectors(dir, camera.up).normalize();
-      const upv = new THREE.Vector3().crossVectors(right, dir).normalize();
-      const move = new THREE.Vector3().addScaledVector(right, -dx*PAN_SPEED*radius)
-                                     .addScaledVector(upv,   dy*PAN_SPEED*radius);
-      target.add(move); updateCamera();
-    }
-  });
-  renderer.domElement.addEventListener('wheel', e=>{
-    e.preventDefault();
-    radius *= (1 + e.deltaY * ZOOM_SPEED); radius = Math.max(1.2, Math.min(20, radius));
-    updateCamera();
-  }, { passive:false });
-
-  function animateRotation(axis, totalDeg){
-    let steps = 60; let step = THREE.MathUtils.degToRad(totalDeg/steps); let frame=0;
-    (function stepAnim(){
-      if(frame>=steps) return; requestAnimationFrame(stepAnim);
-      pointerDir.applyAxisAngle(axis, step);
-      setPointerDir(pointerDir);
-      frame++;
-    })();
-  }
-  document.getElementById('HBtn').onclick = ()=>animateRotation(new THREE.Vector3(1,0,1).normalize(),180);
-  document.getElementById('XBtn').onclick = ()=>animateRotation(new THREE.Vector3(1,0,0),180);
-  document.getElementById('YBtn').onclick = ()=>animateRotation(new THREE.Vector3(0,1,0),180);
-  document.getElementById('ZBtn').onclick = ()=>animateRotation(new THREE.Vector3(0,0,1),180);
-
-  (function render(){ requestAnimationFrame(render); renderer.render(scene, camera); })();
-</script>
+  </script>
 </body>
 </html>
