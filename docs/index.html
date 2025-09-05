@@ -2,55 +2,69 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>GlowScript (JS API) Animation</title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css">
-  <link rel="stylesheet" href="https://www.glowscript.org/css/ide.css">
-
-  <!-- jQuery + jQuery UI（與 GlowScript 3.2 相容） -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
-  <!-- 只需要 glow（JS API 寫法不需 RSrun） -->
-  <script src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
-
-  <script>alert('PING 6.0');</script>
-
+  <title>BlochSim — GlowScript Export</title>
   <style>
-    #gsbox { border: 8px dashed #999; padding: 8px; }
+    /* 方便觀察容器是否有被掛上內容 */
+    #glowscript { border: 8px dashed #999; padding: 8px; }
   </style>
 </head>
 <body>
-  <div id="gsbox" class="glowscript"></div>
 
+<div id="glowscript" class="glowscript">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <!-- GlowScript CSS -->
+  <link rel="stylesheet" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css">
+  <link rel="stylesheet" href="https://www.glowscript.org/css/ide.css">
+
+  <!-- MathJax（你的原始 export 就有用到） -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <!-- ✅ 改用穩定 CDN：jQuery 2.1.4 + jQuery UI 1.12.1 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+  <!-- GlowScript runtime（保持 3.2） -->
+  <script src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
+  <script src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
+
+  <!-- ========= 下面整段就是你的 export JS；中間內容保持不動 ========= -->
   <script>
-    $(function () {
-      // 把畫布綁到容器
-      window.__context = { glowscript_container: $("#gsbox") };
+// START JAVASCRIPT (export)
+;(function() {;
+var ρσ_modules = {};
+ρσ_modules.pythonize = {};
 
-      // 畫布與物件
-      var scene = canvas({ title: "JS API Animation", width: 640, height: 360, background: color.white });
-      var ring0 = ring({ pos: vec(0,0,0), axis: vec(0,0,1), radius: 2.0, thickness: 0.02, color: vec(0.8,0.8,0.8) });
-      var ball  = sphere({ pos: vec(2,0,0), radius: 0.3, color: color.cyan, opacity: 0.9 });
+// ...（此處保留你貼的整段 export 內容，完全不要改）...
 
-      print("✅ JS API animation started");
-      scene.append_to_caption("\\n[tip] click canvas to pause/resume\\n");
+async function __main__() {
+"use strict";
+    var display = canvas;
+    var scene = canvas();
 
-      // 簡單動畫：讓球沿半徑=2 的圓運動
-      var t = 0, running = true;
-      function loop() {
-        if (running) {
-          t += 0.02;  // 調整速度
-          ball.pos = vec( 2*Math.cos(t), 2*Math.sin(t), 0 );
-        }
-        requestAnimationFrame(loop);
-      }
-      loop();
+    // ...（你的程式內容保持不動）...
 
-      // 點擊畫布可暫停/繼續
-      scene.bind("click", function () { running = !running; });
-    });
+    bT = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "T gate", pos: scene.title_anchor, bind: T_gate})]);
+    (await sleep(.1));
+    "157";
+    wP = ρσ_interpolate_kwargs.call(this, winput, [ρσ_desugar_kwargs({pos: scene.title_anchor, bind: null, width: 30})]);
+    "158";
+    bP = ρσ_interpolate_kwargs.call(this, button, [ρσ_desugar_kwargs({text: "phase gate", pos: scene.title_anchor, bind: phase_gate})]);
+};
+if (!__main__.__module__) Object.defineProperties(__main__, {
+    __module__ : {value: null}
+});
+
+// ✅ 這一行是唯一需要修改的地方：不要 removeAttr('id')
+$(function () {
+  window.__context = { glowscript_container: $("#glowscript") };
+  __main__();
+});
+})(); // END export wrapper
+// END JAVASCRIPT
   </script>
+  <!-- ========= export JS 結束 ========= -->
+</div>
+
 </body>
 </html>
