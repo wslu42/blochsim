@@ -5,32 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Web VPython on GitHub Pages</title>
 
-  <!-- GlowScript 需要的 CSS -->
-  <link rel="stylesheet" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css">
-  <link rel="stylesheet" href="https://www.glowscript.org/css/ide.css">
+  <!-- 本地 CSS -->
+  <link rel="stylesheet" href="./css/jquery-ui.custom.css">
+  <link rel="stylesheet" href="./css/ide.css">
 
-  <!-- jQuery + jQueryUI -->
-  <script src="https://www.glowscript.org/lib/jquery/2.1/jquery.min.js"></script>
-  <script src="https://www.glowscript.org/lib/jquery/2.1/jquery-ui.min.js"></script>
+  <!-- 本地 jQuery + jQuery UI（先 jQuery 再 UI） -->
+  <script src="./vendor/jquery/jquery-2.1.0.min.js"></script>
+  <script src="./vendor/jquery-ui/jquery-ui-1.12.0.min.js"></script>
 </head>
-<body>
+<body style="margin:0">
   <!-- GlowScript 容器 -->
   <div id="glowscript" class="glowscript"></div>
 
+  <!-- 告訴 GlowScript 要把畫面掛在上面的容器 -->
   <script>
     window.__context = { glowscript_container: $("#glowscript").removeAttr("id") };
   </script>
 
-  <!-- GlowScript 原始程式碼 -->
+  <!-- 你的 GlowScript 原始碼 -->
   <script type="text/x-glowscript">
-    GlowScript 3.2 VPython
-    scene = canvas(title='Hello Web VPython', width=600, height=400, background=vec(1,1,1))
-    ball = sphere(pos=vec(0,0,0), radius=0.6, color=color.cyan, opacity=0.3)
-    arr = arrow(pos=vec(0,0,0), axis=vec(1,1,1), color=color.magenta)
+GlowScript 3.2 VPython
+scene = canvas(title='Hello Web VPython', width=600, height=400, background=vec(1,1,1))
+ball = sphere(pos=vec(0,0,0), radius=0.6, color=color.cyan, opacity=0.3)
+arr = arrow(pos=vec(0,0,0), axis=vec(1,1,1), color=color.magenta)
   </script>
 
-  <!-- GlowScript runtime 必須在最後 -->
-  <script src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
-  <script src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
+  <!-- 本地 GlowScript runtime（務必在最後、而且順序如下） -->
+  <script src="./vendor/glowscript/glow.3.2.min.js"></script>
+  <script src="./vendor/glowscript/RSrun.3.2.min.js"></script>
 </body>
 </html>
